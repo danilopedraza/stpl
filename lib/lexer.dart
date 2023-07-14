@@ -1,5 +1,6 @@
 enum Token {
-    EOF();
+    eof(),
+    colon();
 }
 
 class Lexer {
@@ -8,6 +9,9 @@ class Lexer {
     Lexer(this._input);
 
     Token nextToken() {
-        return Token.EOF;
+        if (_input == '') {
+            return Token.eof;
+        }
+        return Token.colon;
     }
 }
