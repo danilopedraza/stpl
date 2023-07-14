@@ -1,7 +1,3 @@
-enum TokenType {
-    EOF,
-}
-
 enum Token {
     EOF();
 }
