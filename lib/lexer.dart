@@ -8,7 +8,6 @@ enum Token {
 
 class Lexer {
     final String _input;
-    int _lookaheadIndex = 0;
     
     Lexer(this._input);
 
