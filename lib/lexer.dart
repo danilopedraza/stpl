@@ -34,13 +34,13 @@ class Lexer {
             consume();
         }
 
-        final int start = _lookaheadIndex + 0;
+        final int start = _lookaheadIndex;
 
         while (_lookaheadIndex < _input.length && !isSeparator(_input[_lookaheadIndex])) {
             consume();
         }
 
-        final int end = _lookaheadIndex + 0;
+        final int end = _lookaheadIndex;
 
         final String substring = _input.substring(start, end);
 
