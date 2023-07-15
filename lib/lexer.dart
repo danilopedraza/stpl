@@ -6,9 +6,9 @@ enum Token {
     final String _exp;
     const Token(this._exp);
 
-    String get exp => '^$_exp\$';
+    RegExp get exp => RegExp('^$_exp\$');
 
-    bool matches(String str) => RegExp(exp).hasMatch(str);
+    bool matches(String str) => exp.hasMatch(str);
 }
 
 class Lexer {
