@@ -7,8 +7,6 @@ enum Token {
     const Token(this._exp);
 
     RegExp get exp => RegExp('^$_exp\$');
-
-    bool matches(String str) => exp.hasMatch(str);
 }
 
 class Lexer {
@@ -47,6 +45,6 @@ class Lexer {
         final int end = lookaheadIndex;
 
         final String substring = input.substring(start, end);
-        return Token.values.firstWhere((token) => token.matches(substring));
+        return Token.values.firstWhere((token) => token.exp.hasMatch(substring));
     }
 }
