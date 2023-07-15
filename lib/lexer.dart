@@ -12,13 +12,13 @@ enum Token {
 }
 
 class Lexer {
-    final String _input;
-    int _lookaheadIndex = 0;
+    final String input;
+    int lookaheadIndex = 0;
     
-    Lexer(this._input);
+    Lexer(this.input);
 
     void consume() {
-        _lookaheadIndex++;
+        lookaheadIndex++;
     }
 
     bool isSeparator(String char) {
@@ -26,23 +26,23 @@ class Lexer {
     }
 
     Token nextToken() {
-        if (_lookaheadIndex >= _input.length) {
+        if (lookaheadIndex >= input.length) {
             return Token.eof;
         }
 
-        while (_lookaheadIndex < _input.length && isSeparator(_input[_lookaheadIndex])) {
+        while (lookaheadIndex < input.length && isSeparator(input[lookaheadIndex])) {
             consume();
         }
 
-        final int start = _lookaheadIndex;
+        final int start = lookaheadIndex;
 
-        while (_lookaheadIndex < _input.length && !isSeparator(_input[_lookaheadIndex])) {
+        while (lookaheadIndex < input.length && !isSeparator(input[lookaheadIndex])) {
             consume();
         }
 
-        final int end = _lookaheadIndex;
+        final int end = lookaheadIndex;
 
-        final String substring = _input.substring(start, end);
+        final String substring = input.substring(start, end);
 
         return Token.values.firstWhere((token) => token.matches(substring));
     }
