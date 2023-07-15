@@ -14,6 +14,8 @@ enum Token {
 class Lexer {
     final String input;
     int lookaheadIndex = 0;
+
+    String get lookahead => input[lookaheadIndex];
     
     Lexer(this.input);
 
@@ -26,13 +28,13 @@ class Lexer {
     }
 
     void consumeSeparators() {
-        while (lookaheadIndex < input.length && isSeparator(input[lookaheadIndex])) {
+        while (lookaheadIndex < input.length && isSeparator(lookahead)) {
             consume();
         }
     }
 
     void consumeNonSeparators() {
-        while (lookaheadIndex < input.length && !isSeparator(input[lookaheadIndex])) {
+        while (lookaheadIndex < input.length && !isSeparator(lookahead)) {
             consume();
         }
     }
