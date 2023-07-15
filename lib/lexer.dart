@@ -21,18 +21,22 @@ class Lexer {
         _lookaheadIndex++;
     }
 
+    bool isSeparator(String char) {
+        return char == ' ' || char == '\t' || char == '\r';
+    }
+
     Token nextToken() {
         if (_lookaheadIndex >= _input.length) {
             return Token.eof;
         }
 
-        while (_lookaheadIndex < _input.length && (_input[_lookaheadIndex] == ' ' || _input[_lookaheadIndex] == '\t' || _input[_lookaheadIndex] == '\r')) {
+        while (_lookaheadIndex < _input.length && isSeparator(_input[_lookaheadIndex])) {
             consume();
         }
 
         final int start = _lookaheadIndex + 0;
 
-        while (_lookaheadIndex < _input.length && (_input[_lookaheadIndex] != ' ' && _input[_lookaheadIndex] != '\t' && _input[_lookaheadIndex] != '\r')) {
+        while (_lookaheadIndex < _input.length && !isSeparator(_input[_lookaheadIndex])) {
             consume();
         }
 
