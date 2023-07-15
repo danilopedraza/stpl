@@ -25,25 +25,26 @@ class Lexer {
         return char == ' ' || char == '\t' || char == '\r';
     }
 
-    Token nextToken() {
-        if (lookaheadIndex >= input.length) {
-            return Token.eof;
-        }
-
+    void consumeSeparators() {
         while (lookaheadIndex < input.length && isSeparator(input[lookaheadIndex])) {
             consume();
         }
+    }
 
-        final int start = lookaheadIndex;
-
+    void consumeNonSeparators() {
         while (lookaheadIndex < input.length && !isSeparator(input[lookaheadIndex])) {
             consume();
         }
+    }
 
+    Token nextToken() {
+        consumeSeparators();
+        final int start = lookaheadIndex;
+
+        consumeNonSeparators();
         final int end = lookaheadIndex;
 
         final String substring = input.substring(start, end);
-
         return Token.values.firstWhere((token) => token.matches(substring));
     }
 }
