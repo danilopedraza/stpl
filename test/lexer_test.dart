@@ -37,4 +37,8 @@ void main() {
   test('\'SESSION\' should result in a session token', () {
     expect(Lexer('SESSION').nextToken(), Token.session); 
   });
+
+  test('\'x\' should result in a times token', () {
+    expect(Lexer('x').nextToken(), Token.times);
+  });
 }

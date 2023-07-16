@@ -2,7 +2,8 @@ enum Token {
     eof(''),
     colon(':'),
     lineBreak('\n'),
-    session('session');
+    session('session'),
+    times('x');
 
     final String _exp;
     const Token(this._exp);
