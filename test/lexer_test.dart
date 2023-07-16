@@ -57,4 +57,8 @@ void main() {
   test('\'Press\' should result in a token with the value \'Press\'', () {
     expect(Lexer('Press').nextToken().value, 'Press');
   });
+
+  test('\'Session:\' should result in the first token being session', () {
+    expect(Lexer('Session:').nextToken().type, TokenType.session);
+  });
 }

@@ -4,7 +4,8 @@ enum TokenType {
     lineBreak('\n'),
     session('session'),
     times('x'),
-    name('[a-zA-Z]+');
+    name('[a-zA-Z]+'),
+    none('');
 
     final String _exp;
     const TokenType(this._exp);
@@ -23,7 +24,7 @@ class Lexer {
     final String input;
     int lookaheadIndex = 0;
 
-    String get lookahead => input[lookaheadIndex];
+    String get lookahead => lookaheadIndex < input.length ? input[lookaheadIndex] : '';
     
     Lexer(this.input);
 
@@ -40,22 +41,32 @@ class Lexer {
             consume();
         }
     }
-
-    void consumeNonSeparators() {
-        while (lookaheadIndex < input.length && !isSeparator(lookahead)) {
-            consume();
-        }
-    }
-
+    
     Token nextToken() {
         consumeSeparators();
-        final int start = lookaheadIndex;
+        TokenType type = switch (lookahead) {
+            ''   => TokenType.eof,
+            ':'  => TokenType.colon,
+            '\n' => TokenType.lineBreak,
+            'x'  => TokenType.times,
+            _    =>  (() {
+                if (TokenType.name.exp.hasMatch(lookahead)) {
+                    return TokenType.name;
+                } else {
+                    return TokenType.none;
+                }
+            })(),
+        };
+        
+        String substring = '';
+        while (lookaheadIndex < input.length && type.exp.hasMatch(substring+lookahead)) {
+            substring += lookahead;
+            consume();
+        }
 
-        consumeNonSeparators();
-        final int end = lookaheadIndex;
-
-        final String substring = input.substring(start, end);
-        final TokenType type = TokenType.values.firstWhere((token) => token.exp.hasMatch(substring));
+        if (TokenType.session.exp.hasMatch(substring)) {
+            type = TokenType.session;
+        }
 
         return Token(type, substring);
     }
