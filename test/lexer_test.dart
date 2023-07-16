@@ -27,15 +27,15 @@ void main() {
   });
 
   test('\'session\' should result in a session token', () {
-    expect(Lexer('session').nextToken().type, TokenType.session); 
+    expect(Lexer('session').nextToken().type, TokenType.session);
   });
 
   test('\'Session\' should result in a session token', () {
-    expect(Lexer('Session').nextToken().type, TokenType.session); 
+    expect(Lexer('Session').nextToken().type, TokenType.session);
   });
 
   test('\'SESSION\' should result in a session token', () {
-    expect(Lexer('SESSION').nextToken().type, TokenType.session); 
+    expect(Lexer('SESSION').nextToken().type, TokenType.session);
   });
 
   test('\'x\' should result in a times token', () {
