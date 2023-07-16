@@ -61,4 +61,10 @@ void main() {
   test('\'Session:\' should result in the first token being session', () {
     expect(Lexer('Session:').nextToken().type, TokenType.session);
   });
+
+  test('\'Session:\' should result in the second token being colon', () {
+    Lexer lexer = Lexer('Session:');
+    lexer.nextToken();
+    expect(lexer.nextToken().type, TokenType.colon);
+  });
 }
