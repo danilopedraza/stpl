@@ -25,4 +25,16 @@ void main() {
   test('A line break should result in a lineBreak token', () {
     expect(Lexer('\n').nextToken(), Token.lineBreak);
   });
+
+  test('\'session\' should result in a session token', () {
+    expect(Lexer('session').nextToken(), Token.session); 
+  });
+
+  test('\'Session\' should result in a session token', () {
+    expect(Lexer('Session').nextToken(), Token.session); 
+  });
+
+  test('\'SESSION\' should result in a session token', () {
+    expect(Lexer('SESSION').nextToken(), Token.session); 
+  });
 }

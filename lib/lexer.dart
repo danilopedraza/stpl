@@ -1,12 +1,13 @@
 enum Token {
     eof(''),
     colon(':'),
-    lineBreak('\n');
+    lineBreak('\n'),
+    session('session');
 
     final String _exp;
     const Token(this._exp);
 
-    RegExp get exp => RegExp('^$_exp\$');
+    RegExp get exp => RegExp('^$_exp\$', caseSensitive: false);
 }
 
 class Lexer {
