@@ -4,8 +4,7 @@ enum TokenType {
   lineBreak('\n'),
   session('session'),
   times('x'),
-  name('[a-zA-Z]+'),
-  none('');
+  name('[a-zA-Z]+');
 
   final String _exp;
   const TokenType(this._exp);
