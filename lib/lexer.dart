@@ -1,14 +1,22 @@
-enum Token {
+enum TokenType {
     eof(''),
     colon(':'),
     lineBreak('\n'),
     session('session'),
-    times('x');
+    times('x'),
+    name('[a-zA-Z]+');
 
     final String _exp;
-    const Token(this._exp);
+    const TokenType(this._exp);
 
     RegExp get exp => RegExp('^$_exp\$', caseSensitive: false);
+}
+
+class Token {
+    final TokenType type;
+    final String value;
+
+    Token(this.type, this.value);
 }
 
 class Lexer {
@@ -47,6 +55,8 @@ class Lexer {
         final int end = lookaheadIndex;
 
         final String substring = input.substring(start, end);
-        return Token.values.firstWhere((token) => token.exp.hasMatch(substring));
+        final TokenType type = TokenType.values.firstWhere((token) => token.exp.hasMatch(substring));
+
+        return Token(type, substring);
     }
 }
