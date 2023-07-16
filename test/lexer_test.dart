@@ -2,27 +2,27 @@ import 'package:stpl/lexer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('The next token from a lexer with an empty string should be of type eof', () {
+  test('An empty string should result in an eof token', () {
     expect(Lexer('').nextToken(), Token.eof);
   });
 
-  test('The next token from a lexer with a space should be of type eof', () {
+  test('A space should result in an eof token', () {
     expect(Lexer(' ').nextToken(), Token.eof);
   });
 
-  test('The next token from a lexer with two spaces should be of type eof', () {
+  test('Two spaces should result in an eof token', () {
     expect(Lexer('  ').nextToken(), Token.eof);
   });
 
-  test('The next token from a lexer with separators only should be of type eof', () {
+  test('Every separator once should result in an eof token', () {
     expect(Lexer(' \t\r').nextToken(), Token.eof);
   });
 
-  test('The next token from a lexer with a string with just a colon should be of type colon', () {
+  test('A colon should result in a colon token', () {
     expect(Lexer(':').nextToken(), Token.colon);
   });
 
-  test('The next token from a lexer with a line break should be of type lineBreak', () {
+  test('A line break should result in a lineBreak token', () {
     expect(Lexer('\n').nextToken(), Token.lineBreak);
   });
 }
