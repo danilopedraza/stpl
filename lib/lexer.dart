@@ -45,30 +45,18 @@ class Lexer {
 
   Token nextToken() {
     consumeSeparators();
-    TokenType type = switch (lookahead) {
-      '' => TokenType.eof,
-      ':' => TokenType.colon,
-      '\n' => TokenType.lineBreak,
-      'x' => TokenType.times,
-      _ => (() {
-          if (TokenType.name.exp.hasMatch(lookahead)) {
-            return TokenType.name;
-          } else {
-            return TokenType.none;
-          }
-        })(),
-    };
 
     String substring = '';
+
     while (lookaheadIndex < input.length &&
-        type.exp.hasMatch(substring + lookahead)) {
+        TokenType.values
+            .any((type) => type.exp.hasMatch(substring + lookahead))) {
       substring += lookahead;
       consume();
     }
 
-    if (TokenType.session.exp.hasMatch(substring)) {
-      type = TokenType.session;
-    }
+    TokenType type =
+        TokenType.values.firstWhere((type) => type.exp.hasMatch(substring));
 
     return Token(type, substring);
   }
