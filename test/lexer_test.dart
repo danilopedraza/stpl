@@ -91,7 +91,24 @@ void main() {
   test('\'time\' should result in a time token', () {
     expect(Lexer('time').nextToken().type, TokenType.time);
   });
+
   test('\'times\' should result in a times token', () {
     expect(Lexer('times').nextToken().type, TokenType.times);
+  });
+
+  test('\'5\' should result in a number token', () {
+    expect(Lexer('5').nextToken().type, TokenType.number);
+  });
+
+  test('\'5\' should result in a token with the value \'5\'', () {
+    expect(Lexer('5').nextToken().value, '5');
+  });
+
+  test('\'10\' should result in a number token', () {
+    expect(Lexer('10').nextToken().type, TokenType.number);
+  });
+
+  test('\'10\' should result in a token with the value \'10\'', () {
+    expect(Lexer('10').nextToken().value, '10');
   });
 }

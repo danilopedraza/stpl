@@ -11,7 +11,8 @@ enum TokenType {
   time('time'),
   times('times'),
   up('up'),
-  name('[a-zA-Z]+');
+  name('[a-zA-Z]+'),
+  number('[1-9][0-9]*');
 
   final String _exp;
   const TokenType(this._exp);
