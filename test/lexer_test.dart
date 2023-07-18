@@ -38,8 +38,8 @@ void main() {
     expect(Lexer('SESSION').nextToken().type, TokenType.session);
   });
 
-  test('\'x\' should result in a times token', () {
-    expect(Lexer('x').nextToken().type, TokenType.times);
+  test('\'x\' should result in a separator token', () {
+    expect(Lexer('x').nextToken().type, TokenType.separator);
   });
 
   test('\'squat\' should result in a name token', () {
@@ -66,5 +66,32 @@ void main() {
     Lexer lexer = Lexer('Session:');
     lexer.nextToken();
     expect(lexer.nextToken().type, TokenType.colon);
+  });
+
+  test('\'goes\' should result in a goes token', () {
+    expect(Lexer('goes').nextToken().type, TokenType.goes);
+  });
+
+  test('\'up\' should result in an up token', () {
+    expect(Lexer('up').nextToken().type, TokenType.up);
+  });
+
+  test('\'down\' should result in a down token', () {
+    expect(Lexer('down').nextToken().type, TokenType.down);
+  });
+
+  test('\'kg\' should result in a kg token', () {
+    expect(Lexer('kg').nextToken().type, TokenType.kg);
+  });
+
+  test('\'every\' should result in an every token', () {
+    expect(Lexer('every').nextToken().type, TokenType.every);
+  });
+
+  test('\'time\' should result in a time token', () {
+    expect(Lexer('time').nextToken().type, TokenType.time);
+  });
+  test('\'times\' should result in a times token', () {
+    expect(Lexer('times').nextToken().type, TokenType.times);
   });
 }

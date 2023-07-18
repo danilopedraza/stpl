@@ -2,8 +2,15 @@ enum TokenType {
   eof(''),
   colon(':'),
   lineBreak('\n'),
+  down('down'),
+  every('every'),
+  goes('goes'),
+  kg('kg'),
+  separator('x'),
   session('session'),
-  times('x'),
+  time('time'),
+  times('times'),
+  up('up'),
   name('[a-zA-Z]+');
 
   final String _exp;
