@@ -12,7 +12,7 @@ enum TokenType {
   times('times'),
   up('up'),
   name('[a-zA-Z]+'),
-  number('[1-9][0-9]*');
+  number(r'\d+\.?\d*');
 
   final String _exp;
   const TokenType(this._exp);
@@ -52,7 +52,6 @@ class Lexer {
 
   Token nextToken() {
     consumeSeparators();
-
     String substring = '';
 
     while (lookaheadIndex < input.length &&

@@ -111,4 +111,36 @@ void main() {
   test('\'10\' should result in a token with the value \'10\'', () {
     expect(Lexer('10').nextToken().value, '10');
   });
+
+  test('\'2.5\' should result in a number token', () {
+    expect(Lexer('2.5').nextToken().type, TokenType.number);
+  });
+
+  test('\'2.5\' should result in a token with the value \'2.5\'', () {
+    expect(Lexer('2.5').nextToken().value, '2.5');
+  });
+
+  test('\'0.1\' should result in a number token', () {
+    expect(Lexer('0.1').nextToken().type, TokenType.number);
+  });
+
+  test('\'0.1\' should result in a token with the value \'0.1\'', () {
+    expect(Lexer('0.1').nextToken().value, '0.1');
+  });
+
+  test('\'0.05\' should result in a number token', () {
+    expect(Lexer('0.05').nextToken().type, TokenType.number);
+  });
+
+  test('\'0.05\' should result in a token with the value \'0.05\'', () {
+    expect(Lexer('0.05').nextToken().value, '0.05');
+  });
+
+  test('\'1.\' should result in a number token', () {
+    expect(Lexer('1.').nextToken().type, TokenType.number);
+  });
+
+  test('\'1.\' should result in a token with the value \'1.\'', () {
+    expect(Lexer('1.').nextToken().value, '1.');
+  });
 }
