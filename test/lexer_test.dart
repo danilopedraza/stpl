@@ -143,4 +143,38 @@ void main() {
   test('\'1.\' should result in a token with the value \'1.\'', () {
     expect(Lexer('1.').nextToken().value, '1.');
   });
+
+  test('\'Session A:\\n\' should result in four specific tokens', () {
+    Lexer lexer = Lexer('Session A:\n');
+
+    expect(lexer.nextToken().type, TokenType.session);
+    expect(lexer.nextToken().type, TokenType.name);
+    expect(lexer.nextToken().type, TokenType.colon);
+    expect(lexer.nextToken().type, TokenType.lineBreak);
+  });
+
+  test('\'Squat 3x5:\\n\' should result in five specific tokens', () {
+    Lexer lexer = Lexer('Squat 3x5\n');
+
+    expect(lexer.nextToken().type, TokenType.name);
+    expect(lexer.nextToken().type, TokenType.number);
+    expect(lexer.nextToken().type, TokenType.separator);
+    expect(lexer.nextToken().type, TokenType.number);
+    expect(lexer.nextToken().type, TokenType.lineBreak);
+  });
+
+  test(
+      '\'Squat goes up 2.5kg every time\' should result in seven specific tokens',
+      () {
+    Lexer lexer = Lexer('Squat goes up 2.5kg every time');
+
+    expect(lexer.nextToken().type, TokenType.name);
+    expect(lexer.nextToken().type, TokenType.goes);
+    expect(lexer.nextToken().type, TokenType.up);
+    expect(lexer.nextToken().type, TokenType.number);
+    expect(lexer.nextToken().type, TokenType.kg);
+    expect(lexer.nextToken().type, TokenType.every);
+    expect(lexer.nextToken().type, TokenType.time);
+    expect(lexer.nextToken().type, TokenType.eof);
+  });
 }
