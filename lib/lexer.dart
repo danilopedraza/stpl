@@ -18,6 +18,7 @@ enum TokenType {
   const TokenType(this._exp);
 
   RegExp get exp => RegExp('^$_exp\$', caseSensitive: false);
+  bool matches(String str) => exp.hasMatch(str);
 }
 
 class Token {
@@ -55,14 +56,13 @@ class Lexer {
     String substring = '';
 
     while (lookaheadIndex < input.length &&
-        TokenType.values
-            .any((type) => type.exp.hasMatch(substring + lookahead))) {
+        TokenType.values.any((type) => type.matches(substring + lookahead))) {
       substring += lookahead;
       consume();
     }
 
     TokenType type =
-        TokenType.values.firstWhere((type) => type.exp.hasMatch(substring));
+        TokenType.values.firstWhere((type) => type.matches(substring));
 
     return Token(type, substring);
   }
