@@ -51,18 +51,25 @@ class Lexer {
     }
   }
 
+  bool matchesAnyType(String str) {
+    return TokenType.values.any((type) => type.matches(str));
+  }
+
+  TokenType firstTypeMatched(String str) {
+    return TokenType.values.firstWhere((type) => type.matches(str));
+  }
+
   Token nextToken() {
     consumeSeparators();
     String substring = '';
 
     while (lookaheadIndex < input.length &&
-        TokenType.values.any((type) => type.matches(substring + lookahead))) {
+        matchesAnyType(substring + lookahead)) {
       substring += lookahead;
       consume();
     }
 
-    TokenType type =
-        TokenType.values.firstWhere((type) => type.matches(substring));
+    TokenType type = firstTypeMatched(substring);
 
     return Token(type, substring);
   }
