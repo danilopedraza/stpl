@@ -1,6 +1,13 @@
 import 'package:stpl/lexer.dart';
 import 'package:test/test.dart';
 
+void expectTypes(String str, List<TokenType> types) {
+  Lexer lexer = Lexer(str);
+  for (final type in types) {
+    expect(lexer.nextToken().type, type);
+  }
+}
+
 void main() {
   test('An empty string should result in an eof token', () {
     expect(Lexer('').nextToken().type, TokenType.eof);
@@ -145,36 +152,36 @@ void main() {
   });
 
   test('\'Session A:\\n\' should result in four specific tokens', () {
-    Lexer lexer = Lexer('Session A:\n');
-
-    expect(lexer.nextToken().type, TokenType.session);
-    expect(lexer.nextToken().type, TokenType.name);
-    expect(lexer.nextToken().type, TokenType.colon);
-    expect(lexer.nextToken().type, TokenType.lineBreak);
+    expectTypes('Session A:\n', [
+      TokenType.session,
+      TokenType.name,
+      TokenType.colon,
+      TokenType.lineBreak,
+    ]);
   });
 
   test('\'Squat 3x5:\\n\' should result in five specific tokens', () {
-    Lexer lexer = Lexer('Squat 3x5\n');
-
-    expect(lexer.nextToken().type, TokenType.name);
-    expect(lexer.nextToken().type, TokenType.number);
-    expect(lexer.nextToken().type, TokenType.separator);
-    expect(lexer.nextToken().type, TokenType.number);
-    expect(lexer.nextToken().type, TokenType.lineBreak);
+    expectTypes('Squat 3x5\n', [
+      TokenType.name,
+      TokenType.number,
+      TokenType.separator,
+      TokenType.number,
+      TokenType.lineBreak,
+    ]);
   });
 
   test(
       '\'Squat goes up 2.5kg every time\' should result in seven specific tokens',
       () {
-    Lexer lexer = Lexer('Squat goes up 2.5kg every time');
-
-    expect(lexer.nextToken().type, TokenType.name);
-    expect(lexer.nextToken().type, TokenType.goes);
-    expect(lexer.nextToken().type, TokenType.up);
-    expect(lexer.nextToken().type, TokenType.number);
-    expect(lexer.nextToken().type, TokenType.kg);
-    expect(lexer.nextToken().type, TokenType.every);
-    expect(lexer.nextToken().type, TokenType.time);
-    expect(lexer.nextToken().type, TokenType.eof);
+    expectTypes('Squat goes up 2.5kg every time', [
+      TokenType.name,
+      TokenType.goes,
+      TokenType.up,
+      TokenType.number,
+      TokenType.kg,
+      TokenType.every,
+      TokenType.time,
+      TokenType.eof,
+    ]);
   });
 }
