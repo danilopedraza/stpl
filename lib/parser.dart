@@ -39,23 +39,23 @@ class Parser {
 
   Parser(this.lexer);
 
-  name() {
+  Name name() {
     return Name(lexer.nextToken().value);
   }
 
-  amount() {
+  Amount amount() {
     return Amount(double.parse(lexer.nextToken().value));
   }
 
-  unit() {
+  Unit unit() {
     return Unit.kg;
   }
 
-  load() {
+  Load load() {
     return Load(amount(), unit());
   }
 
-  prescription() {
+  Prescription prescription() {
     final Amount sets = amount();
     lexer.nextToken();
     final Amount reps = amount();
