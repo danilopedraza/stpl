@@ -40,6 +40,8 @@ class Prescription {
 class Parser {
   final Lexer lexer;
 
+  Parser(this.lexer);
+
   void match(TokenType expected, TokenType actual) {
     if (expected != actual) {
       throw FormatException(
@@ -53,8 +55,6 @@ class Parser {
 
     return lookahead;
   }
-
-  Parser(this.lexer);
 
   Name name() {
     return Name(consume(TokenType.name));
