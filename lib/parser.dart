@@ -1,9 +1,5 @@
 import 'package:stpl/lexer.dart';
 
-enum NodeType {
-  name,
-}
-
 class Name {
   final String value;
 
