@@ -15,7 +15,7 @@ void main() {
 
   test('amount() should transform \'5\' in an amount node', () {
     Parser parser = Parser(Lexer('5'));
-    expect(parser.amount() is Number, true);
+    expect(parser.amount() is Amount, true);
   });
 
   test('amount() should transform \'5\' in a node with the amount 5', () {
@@ -41,5 +41,23 @@ void main() {
   test('load() should transform \'5kg\' in a load in kilos', () {
     Parser parser = Parser(Lexer('5kg'));
     expect(parser.load().unit, Unit.kg);
+  });
+
+  test('prescription() should transform \'3x5\' in a prescription node', () {
+    Parser parser = Parser(Lexer('3x5'));
+    expect(parser.prescription() is Prescription, true);
+  });
+
+  test('prescription() should transform \'3x5\' in a prescription of 3 sets',
+      () {
+    Parser parser = Parser(Lexer('3x5'));
+    expect(parser.prescription().sets.value, 3);
+  });
+
+  test(
+      'prescription() should transform \'3x5\' in a prescription of sets of 5 reps',
+      () {
+    Parser parser = Parser(Lexer('3x5'));
+    expect(parser.prescription().reps.value, 5);
   });
 }

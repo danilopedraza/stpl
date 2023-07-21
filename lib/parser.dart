@@ -10,10 +10,10 @@ class Name {
   Name(this.value);
 }
 
-class Number {
+class Amount {
   final num value;
 
-  Number(this.value);
+  Amount(this.value);
 }
 
 enum Unit {
@@ -21,10 +21,17 @@ enum Unit {
 }
 
 class Load {
-  final Number amount;
+  final Amount amount;
   final Unit unit;
 
   Load(this.amount, this.unit);
+}
+
+class Prescription {
+  final Amount sets;
+  final Amount reps;
+
+  Prescription(this.sets, this.reps);
 }
 
 class Parser {
@@ -37,7 +44,7 @@ class Parser {
   }
 
   amount() {
-    return Number(double.parse(lexer.nextToken().value));
+    return Amount(double.parse(lexer.nextToken().value));
   }
 
   unit() {
@@ -46,5 +53,12 @@ class Parser {
 
   load() {
     return Load(amount(), unit());
+  }
+
+  prescription() {
+    final Amount sets = amount();
+    lexer.nextToken();
+    final Amount reps = amount();
+    return Prescription(sets, reps);
   }
 }
