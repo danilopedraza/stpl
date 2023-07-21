@@ -10,6 +10,23 @@ class Name {
   Name(this.value);
 }
 
+class Number {
+  final num value;
+
+  Number(this.value);
+}
+
+enum Unit {
+  kg,
+}
+
+class Load {
+  final Number amount;
+  final Unit unit;
+
+  Load(this.amount, this.unit);
+}
+
 class Parser {
   final Lexer lexer;
 
@@ -17,5 +34,17 @@ class Parser {
 
   name() {
     return Name(lexer.nextToken().value);
+  }
+
+  amount() {
+    return Number(double.parse(lexer.nextToken().value));
+  }
+
+  unit() {
+    return Unit.kg;
+  }
+
+  load() {
+    return Load(amount(), unit());
   }
 }
