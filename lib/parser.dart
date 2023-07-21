@@ -73,9 +73,13 @@ class Parser {
     return Load(amount(), unit());
   }
 
+  void separator() {
+    consume(TokenType.separator);
+  }
+
   Workload workload() {
     final Amount sets = amount();
-    consume(TokenType.separator);
+    separator();
     final Amount reps = amount();
 
     return Workload(sets, reps);
