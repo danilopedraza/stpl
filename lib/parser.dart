@@ -33,17 +33,20 @@ class Prescription {
 class Parser {
   final Lexer lexer;
 
+  consume() => lexer.nextToken();
+
   Parser(this.lexer);
 
   Name name() {
-    return Name(lexer.nextToken().value);
+    return Name(consume().value);
   }
 
   Amount amount() {
-    return Amount(double.parse(lexer.nextToken().value));
+    return Amount(double.parse(consume().value));
   }
 
   Unit unit() {
+    consume();
     return Unit.kg;
   }
 
@@ -53,7 +56,7 @@ class Parser {
 
   Prescription prescription() {
     final Amount sets = amount();
-    lexer.nextToken();
+    consume();
     final Amount reps = amount();
     return Prescription(sets, reps);
   }
