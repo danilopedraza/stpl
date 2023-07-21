@@ -28,14 +28,12 @@ void main() {
     expect(parser.load().unit, Unit.kg);
   });
 
-  test('workload() should transform \'3x5\' in a workload of 3 sets',
-      () {
+  test('workload() should transform \'3x5\' in a workload of 3 sets', () {
     Parser parser = Parser(Lexer('3x5'));
     expect(parser.workload().sets.value, 3);
   });
 
-  test(
-      'workload() should transform \'3x5\' in a workload of sets of 5 reps',
+  test('workload() should transform \'3x5\' in a workload of sets of 5 reps',
       () {
     Parser parser = Parser(Lexer('3x5'));
     expect(parser.workload().reps.value, 5);
@@ -59,5 +57,11 @@ void main() {
         () => parser.workload(),
         throwsA(predicate((FormatException e) =>
             e.message == 'expected \'separator\', got \'kg\'')));
+  });
+
+  test('prescription() should transform \'Squat 3x5\' in a squat prescription',
+      () {
+    Parser parser = Parser(Lexer('Squat 3x5'));
+    expect(parser.prescription().exercise.value, 'Squat');
   });
 }

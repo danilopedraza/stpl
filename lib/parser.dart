@@ -30,6 +30,13 @@ class Workload {
   Workload(this.sets, this.reps);
 }
 
+class Prescription {
+  final Name exercise;
+  final Workload workload;
+
+  Prescription(this.exercise, this.workload);
+}
+
 class Parser {
   final Lexer lexer;
 
@@ -72,5 +79,9 @@ class Parser {
     final Amount reps = amount();
 
     return Workload(sets, reps);
+  }
+
+  Prescription prescription() {
+    return Prescription(name(), workload());
   }
 }
