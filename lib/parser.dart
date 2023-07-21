@@ -35,7 +35,8 @@ class Parser {
 
   void match(TokenType expected, TokenType actual) {
     if (expected != actual) {
-      throw FormatException();
+      throw FormatException(
+          'expected \'${expected.name}\', got \'${actual.name}\'');
     }
   }
 

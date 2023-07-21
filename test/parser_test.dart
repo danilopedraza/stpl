@@ -41,10 +41,23 @@ void main() {
     expect(parser.prescription().reps.value, 5);
   });
 
-  test('prescription() should throw a FormatException when \'3:5\' is passed',
+  test(
+      'prescription() should throw a custom FormatException when \'3:5\' is passed',
       () {
     Parser parser = Parser(Lexer('3:5'));
-    expect(() => parser.prescription(),
-        throwsA(predicate((e) => e is FormatException)));
+    expect(
+        () => parser.prescription(),
+        throwsA(predicate((FormatException e) =>
+            e.message == 'expected \'separator\', got \'colon\'')));
+  });
+
+  test(
+      'prescription() should throw a custom FormatException when \'3kg5\' is passed',
+      () {
+    Parser parser = Parser(Lexer('3kg5'));
+    expect(
+        () => parser.prescription(),
+        throwsA(predicate((FormatException e) =>
+            e.message == 'expected \'separator\', got \'kg\'')));
   });
 }
