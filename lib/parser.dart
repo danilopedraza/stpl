@@ -33,20 +33,28 @@ class Prescription {
 class Parser {
   final Lexer lexer;
 
-  consume() => lexer.nextToken();
+  consume(TokenType expectedType) {
+    final Token lookahead = lexer.nextToken();
+
+    if (lookahead.type != expectedType) {
+      throw FormatException();
+    }
+
+    return lookahead;
+  }
 
   Parser(this.lexer);
 
   Name name() {
-    return Name(consume().value);
+    return Name(consume(TokenType.name).value);
   }
 
   Amount amount() {
-    return Amount(double.parse(consume().value));
+    return Amount(double.parse(consume(TokenType.number).value));
   }
 
   Unit unit() {
-    consume();
+    consume(TokenType.kg);
     return Unit.kg;
   }
 
@@ -56,8 +64,9 @@ class Parser {
 
   Prescription prescription() {
     final Amount sets = amount();
-    consume();
+    consume(TokenType.separator);
     final Amount reps = amount();
+
     return Prescription(sets, reps);
   }
 }

@@ -40,4 +40,11 @@ void main() {
     Parser parser = Parser(Lexer('3x5'));
     expect(parser.prescription().reps.value, 5);
   });
+
+  test('prescription() should throw a FormatException when \'3:5\' is passed',
+      () {
+    Parser parser = Parser(Lexer('3:5'));
+    expect(() => parser.prescription(),
+        throwsA(predicate((e) => e is FormatException)));
+  });
 }
