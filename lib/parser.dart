@@ -3,13 +3,13 @@ import 'package:stpl/lexer.dart';
 class Name {
   final String value;
 
-  Name(this.value);
+  Name(Token nameToken) : value = nameToken.value;
 }
 
 class Amount {
   final num value;
 
-  Amount(this.value);
+  Amount(Token numberToken) : value = double.parse(numberToken.value);
 }
 
 enum Unit {
@@ -50,11 +50,11 @@ class Parser {
   Parser(this.lexer);
 
   Name name() {
-    return Name(consume(TokenType.name).value);
+    return Name(consume(TokenType.name));
   }
 
   Amount amount() {
-    return Amount(double.parse(consume(TokenType.number).value));
+    return Amount(consume(TokenType.number));
   }
 
   Unit unit() {
