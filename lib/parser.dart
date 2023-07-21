@@ -33,12 +33,15 @@ class Prescription {
 class Parser {
   final Lexer lexer;
 
-  consume(TokenType expectedType) {
-    final Token lookahead = lexer.nextToken();
-
-    if (lookahead.type != expectedType) {
+  void match(TokenType expected, TokenType actual) {
+    if (expected != actual) {
       throw FormatException();
     }
+  }
+
+  Token consume(TokenType expectedType) {
+    final Token lookahead = lexer.nextToken();
+    match(expectedType, lookahead.type);
 
     return lookahead;
   }
