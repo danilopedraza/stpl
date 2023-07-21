@@ -23,11 +23,11 @@ class Load {
   Load(this.amount, this.unit);
 }
 
-class Prescription {
+class Workload {
   final Amount sets;
   final Amount reps;
 
-  Prescription(this.sets, this.reps);
+  Workload(this.sets, this.reps);
 }
 
 class Parser {
@@ -66,11 +66,11 @@ class Parser {
     return Load(amount(), unit());
   }
 
-  Prescription prescription() {
+  Workload workload() {
     final Amount sets = amount();
     consume(TokenType.separator);
     final Amount reps = amount();
 
-    return Prescription(sets, reps);
+    return Workload(sets, reps);
   }
 }
