@@ -50,8 +50,10 @@ class Parser {
 
   Parser(this.lexer) : lookahead = lexer.nextToken();
 
+  bool lookaheadIs(TokenType type) => lookahead.type == type;
+
   void match(TokenType expected) {
-    if (expected != lookahead.type) {
+    if (!lookaheadIs(expected)) {
       throw FormatException(
           'expected \'${expected.name}\', got \'${lookahead.type.name}\'');
     }
@@ -80,6 +82,16 @@ class Parser {
     consume(TokenType.separator);
   }
 
+  void colon() {
+    consume(TokenType.colon);
+  }
+
+  void lineBreak() {
+    while (lookaheadIs(TokenType.lineBreak)) {
+      consume(TokenType.lineBreak);
+    }
+  }
+
   Workload workload() {
     final Amount sets = amount();
     separator();
@@ -93,17 +105,15 @@ class Parser {
   Session session() {
     consume(TokenType.session);
     Name sessionName = name();
-    consume(TokenType.colon);
-    consume(TokenType.lineBreak);
+    colon();
+    lineBreak();
 
     List<Prescription> prescriptions = [];
 
     do {
       prescriptions.add(prescription());
-      if (lookahead.type == TokenType.lineBreak) {
-        consume(TokenType.lineBreak);
-      }
-    } while (lookahead.type == TokenType.name);
+      lineBreak();
+    } while (lookaheadIs(TokenType.name));
 
     return Session(sessionName, prescriptions);
   }
