@@ -87,9 +87,9 @@ class Parser {
   }
 
   void lineBreak() {
-    while (lookaheadIs(TokenType.lineBreak)) {
+    do {
       consume(TokenType.lineBreak);
-    }
+    } while (lookaheadIs(TokenType.lineBreak));
   }
 
   Workload workload() {
@@ -106,14 +106,17 @@ class Parser {
     consume(TokenType.session);
     Name sessionName = name();
     colon();
-    consume(TokenType.lineBreak);
     lineBreak();
 
     List<Prescription> prescriptions = [];
 
     do {
       prescriptions.add(prescription());
-      lineBreak();
+      if (lookaheadIs(TokenType.eof)) {
+        break;
+      } else {
+        lineBreak();
+      }
     } while (lookaheadIs(TokenType.name));
 
     return Session(sessionName, prescriptions);
