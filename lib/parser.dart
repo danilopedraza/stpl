@@ -106,6 +106,7 @@ class Parser {
     consume(TokenType.session);
     Name sessionName = name();
     colon();
+    consume(TokenType.lineBreak);
     lineBreak();
 
     List<Prescription> prescriptions = [];
