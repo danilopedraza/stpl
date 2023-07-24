@@ -56,22 +56,16 @@ class Parser {
     return lookahead;
   }
 
-  Name name() {
-    return Name(consume(TokenType.name));
-  }
+  Name name() => Name(consume(TokenType.name));
 
-  Amount amount() {
-    return Amount(consume(TokenType.number));
-  }
+  Amount amount() => Amount(consume(TokenType.number));
 
   Unit unit() {
     consume(TokenType.kg);
     return Unit.kg;
   }
 
-  Load load() {
-    return Load(amount(), unit());
-  }
+  Load load() => Load(amount(), unit());
 
   void separator() {
     consume(TokenType.separator);
@@ -85,7 +79,5 @@ class Parser {
     return Workload(sets, reps);
   }
 
-  Prescription prescription() {
-    return Prescription(name(), workload());
-  }
+  Prescription prescription() => Prescription(name(), workload());
 }
