@@ -37,10 +37,18 @@ class Prescription {
   Prescription(this.exercise, this.workload);
 }
 
+class Session {
+  final Name name;
+  final List<Prescription> prescriptions;
+
+  Session(this.name, this.prescriptions);
+}
+
 class Parser {
   final Lexer lexer;
+  Token lookahead;
 
-  Parser(this.lexer);
+  Parser(this.lexer) : lookahead = lexer.nextToken();
 
   void match(TokenType expected, TokenType actual) {
     if (expected != actual) {
@@ -50,10 +58,11 @@ class Parser {
   }
 
   Token consume(TokenType expectedType) {
-    final Token lookahead = lexer.nextToken();
     match(expectedType, lookahead.type);
+    final Token oldLookahead = lookahead;
+    lookahead = lexer.nextToken();
 
-    return lookahead;
+    return oldLookahead;
   }
 
   Name name() => Name(consume(TokenType.name));
@@ -80,4 +89,22 @@ class Parser {
   }
 
   Prescription prescription() => Prescription(name(), workload());
+
+  Session session() {
+    consume(TokenType.session);
+    Name sessionName = name();
+    consume(TokenType.colon);
+    consume(TokenType.lineBreak);
+
+    List<Prescription> prescriptions = [];
+
+    do {
+      prescriptions.add(prescription());
+      if (lookahead.type == TokenType.lineBreak) {
+        consume(TokenType.lineBreak);
+      }
+    } while (lookahead.type == TokenType.name);
+
+    return Session(sessionName, prescriptions);
+  }
 }

@@ -64,4 +64,19 @@ void main() {
     Parser parser = Parser(Lexer('Squat 3x5'));
     expect(parser.prescription().exercise.value, 'Squat');
   });
+
+  test('session() should transform \'Session A...\' in a session node named \'A\'', () {
+    Parser parser = Parser(Lexer('Session A:\nSquat 3x5'));
+    expect(parser.session().name.value, 'A');
+  });
+
+  test('session() should transform \'Session A...\' in a session with the first prescription', () {
+    Parser parser = Parser(Lexer('Session A:\nSquat 3x5'));
+    expect(parser.session().prescriptions[0].exercise.value, 'Squat');
+  });
+
+  test('session() should transform \'Session A...\' in a session with the second prescription', () {
+    Parser parser = Parser(Lexer('Session A:\nSquat 3x5\nPress 3x5'));
+    expect(parser.session().prescriptions[1].exercise.value, 'Press');
+  });
 }
