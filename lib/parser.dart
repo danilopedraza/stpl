@@ -50,15 +50,15 @@ class Parser {
 
   Parser(this.lexer) : lookahead = lexer.nextToken();
 
-  void match(TokenType expected, TokenType actual) {
-    if (expected != actual) {
+  void match(TokenType expected) {
+    if (expected != lookahead.type) {
       throw FormatException(
-          'expected \'${expected.name}\', got \'${actual.name}\'');
+          'expected \'${expected.name}\', got \'${lookahead.type.name}\'');
     }
   }
 
   Token consume(TokenType expectedType) {
-    match(expectedType, lookahead.type);
+    match(expectedType);
     final Token oldLookahead = lookahead;
     lookahead = lexer.nextToken();
 
