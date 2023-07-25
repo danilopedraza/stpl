@@ -31,10 +31,10 @@ class Workload {
 }
 
 class Prescription {
-  final Name exercise;
+  final Name exerciseName;
   final Workload workload;
 
-  Prescription(this.exercise, this.workload);
+  Prescription(this.exerciseName, this.workload);
 }
 
 class Session {
