@@ -87,8 +87,12 @@ class Parser {
   }
 
   void lineBreak() {
+    consume(TokenType.lineBreak);
+  }
+
+  void lineBreaks() {
     do {
-      consume(TokenType.lineBreak);
+      lineBreak();
     } while (lookaheadIs(TokenType.lineBreak));
   }
 
@@ -111,7 +115,7 @@ class Parser {
       if (lookaheadIs(TokenType.eof)) {
         break;
       } else {
-        lineBreak();
+        lineBreaks();
       }
     } while (lookaheadIs(TokenType.name));
 
@@ -122,7 +126,7 @@ class Parser {
     consume(TokenType.session);
     Name sessionName = name();
     colon();
-    lineBreak();
+    lineBreaks();
 
     return Session(sessionName, prescriptions());
   }
