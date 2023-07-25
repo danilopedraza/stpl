@@ -102,16 +102,12 @@ class Parser {
 
   Prescription prescription() => Prescription(name(), workload());
 
-  Session session() {
-    consume(TokenType.session);
-    Name sessionName = name();
-    colon();
-    lineBreak();
-
-    List<Prescription> prescriptions = [];
+  List<Prescription> prescriptions() {
+    List<Prescription> res = [];
 
     do {
-      prescriptions.add(prescription());
+      res.add(prescription());
+
       if (lookaheadIs(TokenType.eof)) {
         break;
       } else {
@@ -119,6 +115,15 @@ class Parser {
       }
     } while (lookaheadIs(TokenType.name));
 
-    return Session(sessionName, prescriptions);
+    return res;
+  }
+
+  Session session() {
+    consume(TokenType.session);
+    Name sessionName = name();
+    colon();
+    lineBreak();
+
+    return Session(sessionName, prescriptions());
   }
 }
