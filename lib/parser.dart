@@ -44,6 +44,25 @@ class Session {
   Session(this.name, this.prescriptions);
 }
 
+enum RuleType {
+  up,
+}
+
+class Rule {
+  final Name exerciseName;
+  final RuleType type;
+  final Load load;
+  final Period period;
+
+  Rule(this.exerciseName, this.type, this.load, this.period);
+}
+
+class Period {
+  final int value;
+
+  Period(this.value);
+}
+
 class Parser {
   final Lexer lexer;
   Token lookahead;
@@ -129,5 +148,30 @@ class Parser {
     lineBreaks();
 
     return Session(sessionName, prescriptions());
+  }
+
+  Period period() {
+    consume(TokenType.every);
+
+    if (lookaheadIs(TokenType.time)) {
+      consume(TokenType.time);
+      return Period(1);
+    } else {
+      final int period = amount().value.toInt();
+      consume(TokenType.times);
+      return Period(period);
+    }
+  }
+
+  RuleType ruleType() {
+    consume(TokenType.up);
+    return RuleType.up;
+  }
+
+  Rule rule() {
+    final exerciseName = name();
+    consume(TokenType.goes);
+
+    return Rule(exerciseName, ruleType(), load(), period());
   }
 }

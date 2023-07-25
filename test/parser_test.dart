@@ -93,4 +93,39 @@ void main() {
         Parser(Lexer('Session A:\nSquat 3x5\nPress 3x5\n\nDeadlift 1x5'));
     expect(parser.session().prescriptions[2].exerciseName.value, 'Deadlift');
   });
+
+  test(
+      'rule() should transform \'Squat goes up 2.5kg every time\' in a rule for the squat',
+      () {
+    Parser parser = Parser(Lexer('Squat goes up 2.5kg every time'));
+    expect(parser.rule().exerciseName.value, 'Squat');
+  });
+
+  test(
+      'rule() should transform \'Squat goes up 2.5kg every time\' in a rule for adding load',
+      () {
+    Parser parser = Parser(Lexer('Squat goes up 2.5kg every time'));
+    expect(parser.rule().type, RuleType.up);
+  });
+
+  test(
+      'rule() should transform \'Squat goes up 2.5kg every time\' in a rule with a load in kg',
+      () {
+    Parser parser = Parser(Lexer('Squat goes up 2.5kg every time'));
+    expect(parser.rule().load.unit, Unit.kg);
+  });
+
+  test(
+      'rule() should transform \'Squat goes up 2.5kg every time\' in a rule of period 1',
+      () {
+    Parser parser = Parser(Lexer('Squat goes up 2.5kg every time'));
+    expect(parser.rule().period.value, 1);
+  });
+
+  test(
+      'rule() should transform \'Row goes up 2.5kg every 2 times\' in a rule of period 2',
+      () {
+    Parser parser = Parser(Lexer('Row goes up 2.5kg every 2 times'));
+    expect(parser.rule().period.value, 2);
+  });
 }
