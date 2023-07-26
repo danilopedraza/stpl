@@ -60,3 +60,18 @@ Row goes up 2.5kg every 2 times
 Deadlift goes up 5kg every time
 ```
 
+But this seems kinda strange: I could put the progression schemes in the same place where I put the prescription for the exercises. Something like this:
+
+```
+Session A:
+
+Squat 3x5 with 2.5kg more
+Press 3x5 with 2.5kg more every 2 times
+Deadlift 1x5 with 5kg more
+
+Session B:
+
+Squat 3x5 with 2.5kg more
+Bench 3x5 with 2.5kg more
+Row 3x5 with 2.5kg more every 2 times
+```
