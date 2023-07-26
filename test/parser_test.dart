@@ -59,10 +59,9 @@ void main() {
             e.message == 'expected \'separator\', got \'kg\'')));
   });
 
-  test('prescription() should transform \'Squat 3x5\' in a squat prescription',
-      () {
+  test('exercise() should transform \'Squat 3x5\' in a squat exercise', () {
     Parser parser = Parser(Lexer('Squat 3x5'));
-    expect(parser.prescription().exerciseName.value, 'Squat');
+    expect(parser.exercise().name.value, 'Squat');
   });
 
   test(
@@ -73,25 +72,25 @@ void main() {
   });
 
   test(
-      'session() should transform \'Session A...\' in a session with the first prescription',
+      'session() should transform \'Session A...\' in a session with the first exercise',
       () {
     Parser parser = Parser(Lexer('Session A:\nSquat 3x5'));
-    expect(parser.session().prescriptions[0].exerciseName.value, 'Squat');
+    expect(parser.session().prescriptions[0].name.value, 'Squat');
   });
 
   test(
-      'session() should transform \'Session A...\' in a session with the second prescription',
+      'session() should transform \'Session A...\' in a session with the second exercise',
       () {
     Parser parser = Parser(Lexer('Session A:\nSquat 3x5\nPress 3x5'));
-    expect(parser.session().prescriptions[1].exerciseName.value, 'Press');
+    expect(parser.session().prescriptions[1].name.value, 'Press');
   });
 
   test(
-      'session() should transform \'Session A...\' in a session with the third prescription',
+      'session() should transform \'Session A...\' in a session with the third exercise',
       () {
     Parser parser =
         Parser(Lexer('Session A:\nSquat 3x5\nPress 3x5\n\nDeadlift 1x5'));
-    expect(parser.session().prescriptions[2].exerciseName.value, 'Deadlift');
+    expect(parser.session().prescriptions[2].name.value, 'Deadlift');
   });
 
   test(

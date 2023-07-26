@@ -36,16 +36,16 @@ class Workload {
   Workload(this.sets, this.reps, this.load);
 }
 
-class Prescription {
-  final Name exerciseName;
+class Exercise {
+  final Name name;
   final Workload workload;
 
-  Prescription(this.exerciseName, this.workload);
+  Exercise(this.name, this.workload);
 }
 
 class Session {
   final Name name;
-  final List<Prescription> prescriptions;
+  final List<Exercise> prescriptions;
 
   Session(this.name, this.prescriptions);
 }
@@ -125,7 +125,7 @@ class Parser {
     final Amount sets = amount();
     separator();
     final Amount reps = amount();
-    
+
     if (lookaheadIs(TokenType.separator)) {
       separator();
       return Workload(sets, reps, load());
@@ -134,13 +134,13 @@ class Parser {
     return Workload(sets, reps, UnknownLoad());
   }
 
-  Prescription prescription() => Prescription(name(), workload());
+  Exercise exercise() => Exercise(name(), workload());
 
-  List<Prescription> prescriptions() {
-    List<Prescription> res = [];
+  List<Exercise> prescriptions() {
+    List<Exercise> res = [];
 
     do {
-      res.add(prescription());
+      res.add(exercise());
 
       if (lookaheadIs(TokenType.eof)) {
         break;
