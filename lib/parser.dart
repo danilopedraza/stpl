@@ -14,6 +14,7 @@ class Amount {
 
 enum Unit {
   kg,
+  none,
 }
 
 class Load {
@@ -23,11 +24,16 @@ class Load {
   Load(this.amount, this.unit);
 }
 
+class UnknownLoad extends Load {
+  UnknownLoad() : super(Amount(Token(TokenType.number, '0')), Unit.none);
+}
+
 class Workload {
   final Amount sets;
   final Amount reps;
+  final Load load;
 
-  Workload(this.sets, this.reps);
+  Workload(this.sets, this.reps, this.load);
 }
 
 class Prescription {
@@ -119,8 +125,13 @@ class Parser {
     final Amount sets = amount();
     separator();
     final Amount reps = amount();
+    
+    if (lookaheadIs(TokenType.separator)) {
+      separator();
+      return Workload(sets, reps, load());
+    }
 
-    return Workload(sets, reps);
+    return Workload(sets, reps, UnknownLoad());
   }
 
   Prescription prescription() => Prescription(name(), workload());

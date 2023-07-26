@@ -128,4 +128,9 @@ void main() {
     Parser parser = Parser(Lexer('Row goes up 2.5kg every 2 times'));
     expect(parser.rule().period.value, 2);
   });
+
+  test('workload() should transform \'3x5x60kg\' in a workload in kg', () {
+    Parser parser = Parser(Lexer('3x5x60kg'));
+    expect(parser.workload().load.unit, Unit.kg);
+  });
 }
