@@ -75,3 +75,15 @@ Squat 3x5 with 2.5kg more
 Bench 3x5 with 2.5kg more
 Row 3x5 with 2.5kg more every 2 times
 ```
+
+But... I'm not implementing it right now. 
+
+Right now I need a way to write the work done in the training sessions, so I can create the next prescriptions. The first thing that comes to my mind is something like this:
+
+```
+Training session 1 (A):
+
+Squat 3x5x60kg
+Press 3x5x30kg
+Deadlift 1x5x70kg
+```
