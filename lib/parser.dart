@@ -45,9 +45,9 @@ class Exercise {
 
 class Session {
   final Name name;
-  final List<Exercise> prescriptions;
+  final List<Exercise> exercises;
 
-  Session(this.name, this.prescriptions);
+  Session(this.name, this.exercises);
 }
 
 enum RuleType {
@@ -143,7 +143,7 @@ class Parser {
 
   Exercise exercise() => Exercise(name(), workload());
 
-  List<Exercise> prescriptions() {
+  List<Exercise> exercises() {
     List<Exercise> res = [];
 
     do {
@@ -165,7 +165,7 @@ class Parser {
     colon();
     lineBreaks();
 
-    return Session(sessionName, prescriptions());
+    return Session(sessionName, exercises());
   }
 
   Period period() {
@@ -203,6 +203,6 @@ class Parser {
     colon();
     lineBreaks();
 
-    return TrainingSession(type, prescriptions());
+    return TrainingSession(type, exercises());
   }
 }

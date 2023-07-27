@@ -75,14 +75,14 @@ void main() {
       'session() should transform \'Session A...\' in a session with the first exercise',
       () {
     Parser parser = Parser(Lexer('Session A:\nSquat 3x5'));
-    expect(parser.session().prescriptions[0].name.value, 'Squat');
+    expect(parser.session().exercises[0].name.value, 'Squat');
   });
 
   test(
       'session() should transform \'Session A...\' in a session with the second exercise',
       () {
     Parser parser = Parser(Lexer('Session A:\nSquat 3x5\nPress 3x5'));
-    expect(parser.session().prescriptions[1].name.value, 'Press');
+    expect(parser.session().exercises[1].name.value, 'Press');
   });
 
   test(
@@ -90,7 +90,7 @@ void main() {
       () {
     Parser parser =
         Parser(Lexer('Session A:\nSquat 3x5\nPress 3x5\n\nDeadlift 1x5'));
-    expect(parser.session().prescriptions[2].name.value, 'Deadlift');
+    expect(parser.session().exercises[2].name.value, 'Deadlift');
   });
 
   test(
