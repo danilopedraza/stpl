@@ -132,4 +132,26 @@ void main() {
     Parser parser = Parser(Lexer('3x5x60kg'));
     expect(parser.workload().load.unit, Unit.kg);
   });
+
+  test(
+      'trainingSession() should transform \'Training session 1 (A)...\' in a log for an A training session',
+      () {
+    Parser parser = Parser(Lexer('Training session 1 (A):\nSquat 3x5x60kg'));
+    expect(parser.trainingSession().type.value, 'A');
+  });
+
+  test(
+      'trainingSession() should transform \'Training session 1 (A)...\' in a log with the first exercise',
+      () {
+    Parser parser = Parser(Lexer('Training session 1 (A):\nSquat 3x5x60kg'));
+    expect(parser.trainingSession().exercises[0].name.value, 'Squat');
+  });
+
+  test(
+      'trainingSession() should transform \'Training session 1 (A)...\' in a log with the second exercise',
+      () {
+    Parser parser = Parser(
+        Lexer('Training session 1 (A):\nSquat 3x5x60kg\nPress 3x5x30kg'));
+    expect(parser.trainingSession().exercises[1].name.value, 'Press');
+  });
 }

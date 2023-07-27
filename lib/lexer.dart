@@ -6,10 +6,13 @@ enum TokenType {
   every('every'),
   goes('goes'),
   kg('kg'),
+  lparen(r'\('),
+  rparen(r'\)'),
   separator('x'),
   session('session'),
   time('time'),
   times('times'),
+  training('training'),
   up('up'),
   name('[a-zA-Z]+'),
   number(r'\d+\.?\d*');

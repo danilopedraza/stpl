@@ -69,6 +69,13 @@ class Period {
   Period(this.value);
 }
 
+class TrainingSession {
+  final Name type;
+  final List<Exercise> exercises;
+
+  TrainingSession(this.type, this.exercises);
+}
+
 class Parser {
   final Lexer lexer;
   Token lookahead;
@@ -184,5 +191,18 @@ class Parser {
     consume(TokenType.goes);
 
     return Rule(exerciseName, ruleType(), load(), period());
+  }
+
+  TrainingSession trainingSession() {
+    consume(TokenType.training);
+    consume(TokenType.session);
+    amount();
+    consume(TokenType.lparen);
+    final Name type = name();
+    consume(TokenType.rparen);
+    colon();
+    lineBreaks();
+
+    return TrainingSession(type, prescriptions());
   }
 }
