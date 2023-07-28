@@ -233,7 +233,7 @@ class Parser {
     } while (lookaheadIs(TokenType.name));
 
     return res;
-  } 
+  }
 
   Progression progression() {
     consume(TokenType.progression);
