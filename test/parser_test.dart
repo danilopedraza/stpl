@@ -166,4 +166,28 @@ void main() {
         Lexer('Progression:\nSquat goes up 2.5kg every time\nDeadlift goes up 2.5kg every time'));
     expect(parser.progression().rules[1].exerciseName.value, 'Deadlift');
   });
+
+  test('A training program has the sessions of the program', () {
+    Parser parser = Parser(
+        Lexer('Session A:\nSquat 3x5\nProgression:\nSquat goes up 2.5kg every time'));
+    expect(parser.program().sessions[0].name.value, 'A');
+  });
+
+  test('A training program has the rules for progression', () {
+    Parser parser = Parser(
+        Lexer('Session A:\nSquat 3x5\nProgression:\nSquat goes up 2.5kg every time'));
+    expect(parser.program().progression.rules[0].exerciseName.value, 'Squat');
+  });
+
+  test('A training program can have several sessions', () {
+    Parser parser = Parser(
+        Lexer('Session A:\nSquat 3x5\nSession B:\nSquat 3x5\nProgression:\nSquat goes up 2.5kg every time'));
+    expect(parser.program().sessions[1].name.value, 'B');
+  });
+
+  test('A training program can have several rules', () {
+    Parser parser = Parser(
+        Lexer('Session A:\nSquat 3x5\nSession B:\nDeadlift 1x5\nProgression:\nSquat goes up 2.5kg every time\nDeadlift goes up 5kg every time'));
+    expect(parser.program().progression.rules[1].exerciseName.value, 'Deadlift');
+  });
 }

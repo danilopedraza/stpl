@@ -82,6 +82,13 @@ class Progression {
   Progression(this.rules);
 }
 
+class Program {
+  final List<Session> sessions;
+  final Progression progression;
+
+  Program(this.sessions, this.progression);
+}
+
 class Parser {
   final Lexer lexer;
   Token lookahead;
@@ -233,5 +240,19 @@ class Parser {
     consume(TokenType.colon);
     lineBreaks();
     return Progression(rules());
+  }
+
+  List<Session> sessions() {
+    List<Session> res = [];
+
+    do {
+      res.add(session());
+    } while (lookaheadIs(TokenType.session));
+
+    return res;
+  }
+
+  Program program() {
+    return Program(sessions(), progression());
   }
 }
