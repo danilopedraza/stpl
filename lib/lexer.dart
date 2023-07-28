@@ -7,6 +7,7 @@ enum TokenType {
   goes('goes'),
   kg('kg'),
   lparen(r'\('),
+  progression('progression'),
   rparen(r'\)'),
   separator('x'),
   session('session'),

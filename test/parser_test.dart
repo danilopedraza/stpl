@@ -154,4 +154,16 @@ void main() {
         Lexer('Training session 1 (A):\nSquat 3x5x60kg\nPress 3x5x30kg'));
     expect(parser.trainingSession().exercises[1].name.value, 'Press');
   });
+
+  test('A list of rules should start with \'Progression:...\'', () {
+    Parser parser = Parser(
+        Lexer('Progression:\nSquat goes up 2.5kg every time'));
+    expect(parser.progression().rules[0].exerciseName.value, 'Squat');
+  });
+
+  test('A list of rules can have more than one rule', () {
+    Parser parser = Parser(
+        Lexer('Progression:\nSquat goes up 2.5kg every time\nDeadlift goes up 2.5kg every time'));
+    expect(parser.progression().rules[1].exerciseName.value, 'Deadlift');
+  });
 }

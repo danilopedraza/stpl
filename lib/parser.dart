@@ -76,6 +76,12 @@ class TrainingSession {
   TrainingSession(this.type, this.exercises);
 }
 
+class Progression {
+  final List<Rule> rules;
+
+  Progression(this.rules);
+}
+
 class Parser {
   final Lexer lexer;
   Token lookahead;
@@ -204,5 +210,28 @@ class Parser {
     lineBreaks();
 
     return TrainingSession(type, exercises());
+  }
+
+  List<Rule> rules() {
+    List<Rule> res = [];
+
+    do {
+      res.add(rule());
+
+      if (lookaheadIs(TokenType.eof)) {
+        break;
+      } else {
+        lineBreaks();
+      }
+    } while (lookaheadIs(TokenType.name));
+
+    return res;
+  } 
+
+  Progression progression() {
+    consume(TokenType.progression);
+    consume(TokenType.colon);
+    lineBreaks();
+    return Progression(rules());
   }
 }
