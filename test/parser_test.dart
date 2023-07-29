@@ -191,4 +191,40 @@ void main() {
     expect(
         parser.program().progression.rules[1].exerciseName.value, 'Deadlift');
   });
+
+  test('A STPL sentence has a training program', () {
+    Parser parser = Parser(Lexer(
+        'Session A:\nSquat 3x5\nProgression:\nSquat goes up 2.5kg every time\nTraining Session 1 (A):\nSquat 3x5x60kg'));
+    expect(parser.sentence().program.sessions[0].name.value, 'A');
+  });
+
+  test('A STPL sentence has session logs', () {
+    Parser parser = Parser(Lexer(
+        'Session A:\nSquat 3x5\nProgression:\nSquat goes up 2.5kg every time\nTraining Session 1 (A):\nSquat 3x5x60kg'));
+    expect(
+        parser
+            .sentence()
+            .trainingSessions[0]
+            .exercises[0]
+            .workload
+            .load
+            .amount
+            .value,
+        60);
+  });
+
+  test('A STPL sentence can have several session logs', () {
+    Parser parser = Parser(Lexer(
+        'Session A:\nSquat 3x5\nProgression:\nSquat goes up 2.5kg every time\nTraining Session 1 (A):\nSquat 3x5x60kg\nTraining Session 2 (A):\nSquat 3x5x62.5kg'));
+    expect(
+        parser
+            .sentence()
+            .trainingSessions[1]
+            .exercises[0]
+            .workload
+            .load
+            .amount
+            .value,
+        62.5);
+  });
 }

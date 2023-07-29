@@ -89,6 +89,13 @@ class Program {
   Program(this.sessions, this.progression);
 }
 
+class Sentence {
+  final Program program;
+  final List<TrainingSession> trainingSessions;
+
+  Sentence(this.program, this.trainingSessions);
+}
+
 class Parser {
   final Lexer lexer;
   Token lookahead;
@@ -219,6 +226,16 @@ class Parser {
     return TrainingSession(type, exercises());
   }
 
+  List<TrainingSession> trainingSessions() {
+    List<TrainingSession> res = [];
+
+    do {
+      res.add(trainingSession());
+    } while (lookaheadIs(TokenType.training));
+
+    return res;
+  }
+
   List<Rule> rules() {
     List<Rule> res = [];
 
@@ -254,5 +271,9 @@ class Parser {
 
   Program program() {
     return Program(sessions(), progression());
+  }
+
+  Sentence sentence() {
+    return Sentence(program(), trainingSessions());
   }
 }
