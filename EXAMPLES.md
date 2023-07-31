@@ -86,4 +86,29 @@ Training session 1 (A):
 Squat 3x5x60kg
 Press 3x5x30kg
 Deadlift 1x5x70kg
+
+Training session 2 (B):
+
+Squat 3x5x62.5kg
+Bench 3x5x40kg
+Row 3x5x35kg
+```
+
+This is enough to start. Now, I need to generate the training sessions. For this particular training program, the next prescription is generated with the log of (at most) the last two previous sessions. There are programs where every training session is fixed since the beginning, given some initial values (usually max loads of some movements). There are programs where every training session is independent of each other, and the loads are prescribed in place using effort or a range for selecting a load.
+
+For the output format, I think a table is fine. Each row is a prescription for an exercise. This is an example of the expected generated third session from the two logs above (of type A):
+
+| Exercise | Sets | Reps | Load |
+| -------- | ---- | ---- | ---- |
+| Squat    | 3    | 5    | 65kg |
+| Press    | 3    | 5    | 30kg |
+| Deadlift | 1    | 5    | 75kg |
+
+We should be able to export the next training session in this format (a Markdown-formatted table that is fairly readable without rendering it) or in CSV. The CSV would be like this:
+
+```
+Exercise,Sets,Reps,Load
+Squat,3,5,65kg
+Press,3,5,30kg
+Deadlift,1,5,75kg
 ```
