@@ -31,6 +31,21 @@ void main() {
     expect(evaluator.nextSession().type.value, 'B');
   });
 
+  test('nextSession() should give a new prescription if possible', () {
+    const String input = '''Session A:
+                              Squat 3x5
+                            Session B:
+                              Squat 3x5
+                            Progression:
+                              Squat goes up 1kg every time
+                            Training session 1 (A):
+                              Squat 3x5x20kg
+''';
+    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
+        equals(21));
+  });
+
   test('nextSession() should increase the load if needed', () {
     const String input = '''Session A:
                               Squat 3x5
