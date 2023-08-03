@@ -12,23 +12,37 @@ class Evaluator {
     return sentence.program.sessions[index].name;
   }
 
-  TrainingSession lastTrainingSession() {
-    return sentence.trainingSessions[0];
+  bool sessionOfTypeExists(Name type) {
+    return sentence.trainingSessions
+        .any((session) => session.type.value == type.value);
+  }
+
+  TrainingSession lastSession() => sentence.trainingSessions.last;
+
+  TrainingSession lastSessionOfType(Name type) {
+    return sentence.trainingSessions
+        .lastWhere((session) => session.type.value == type.value);
+  }
+
+  Exercise updateExercise(Exercise exercise) {
+    return Exercise(
+        exercise.name,
+        Workload(
+          exercise.workload.sets,
+          exercise.workload.reps,
+          Load(Amount(exercise.workload.load.amount.value + 1),
+              exercise.workload.load.unit),
+        ));
   }
 
   TrainingSession nextSession() {
-    final TrainingSession lastSession = lastTrainingSession();
     final Name newType = nextSessionType();
+    final TrainingSession pastSession = sessionOfTypeExists(newType)
+        ? lastSessionOfType(newType)
+        : lastSession();
+
     final List<Exercise> newExercises = [
-      Exercise(
-          lastSession.exercises[0].name,
-          Workload(
-            lastSession.exercises[0].workload.sets,
-            lastSession.exercises[0].workload.reps,
-            Load(
-                Amount(lastSession.exercises[0].workload.load.amount.value + 1),
-                lastSession.exercises[0].workload.load.unit),
-          ))
+      updateExercise(pastSession.exercises[0]),
     ];
 
     return TrainingSession(newType, newExercises);
