@@ -9,7 +9,7 @@ class Name {
 class Amount {
   final num value;
 
-  Amount(Token numberToken) : value = double.parse(numberToken.value);
+  Amount(this.value);
 }
 
 enum Unit {
@@ -25,7 +25,7 @@ class Load {
 }
 
 class UnknownLoad extends Load {
-  UnknownLoad() : super(Amount(Token(TokenType.number, '0')), Unit.none);
+  UnknownLoad() : super(Amount(0), Unit.none);
 }
 
 class Workload {
@@ -121,7 +121,8 @@ class Parser {
 
   Name name() => Name(consume(TokenType.name));
 
-  Amount amount() => Amount(consume(TokenType.number));
+  Amount amount() => Amount(double.parse(consume(TokenType.number).value));
+  // double.parse(numberToken.value)
 
   Unit unit() {
     consume(TokenType.kg);
