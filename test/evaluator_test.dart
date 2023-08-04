@@ -46,6 +46,21 @@ void main() {
         equals(21));
   });
 
+  test('nextSession() should prescribe the correct exercises', () {
+    const String input = '''Session A:
+                              Squat 3x5
+                            Session B:
+                              Press 3x5
+                            Progression:
+                              Squat goes up 2.5kg every time
+                              Press goes up 1kg every time
+                            Training session 1 (A):
+                              Squat 3x5x20kg
+''';
+    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    expect(evaluator.nextSession().exercises[0].name.value, equals('Press'));
+  });
+
   test('nextSession() should increase the load if needed', () {
     const String input = '''Session A:
                               Squat 3x5
