@@ -4,6 +4,13 @@ class Name {
   final String value;
 
   Name(Token nameToken) : value = nameToken.value;
+
+  @override
+  bool operator ==(Object other) =>
+      other is Name ? value == other.value : false;
+
+  @override
+  int get hashCode => value.hashCode;
 }
 
 class Amount {

@@ -13,15 +13,14 @@ class Evaluator {
   }
 
   bool sessionOfTypeExists(Name type) {
-    return sentence.trainingSessions
-        .any((session) => session.type.value == type.value);
+    return sentence.trainingSessions.any((session) => session.type == type);
   }
 
   TrainingSession lastSession() => sentence.trainingSessions.last;
 
   TrainingSession lastSessionOfType(Name type) {
     return sentence.trainingSessions
-        .lastWhere((session) => session.type.value == type.value);
+        .lastWhere((session) => session.type == type);
   }
 
   Exercise updateExercise(Exercise exercise) {
@@ -37,19 +36,18 @@ class Evaluator {
 
   Session nextSessionScheme(Name name) {
     return sentence.program.sessions
-        .firstWhere((session) => session.name.value == name.value);
+        .firstWhere((session) => session.name == name);
   }
 
   bool ruleAvailable(Exercise scheme) {
     return sentence.program.progression.rules
-        .any((rule) => rule.exerciseName.value == scheme.name.value);
+        .any((rule) => rule.exerciseName == scheme.name);
   }
 
   Load prescribeLoad(Exercise scheme, TrainingSession pastSession) {
-    if (pastSession.exercises[0].name.value == scheme.name.value &&
-        ruleAvailable(scheme)) {
+    if (pastSession.exercises[0].name == scheme.name && ruleAvailable(scheme)) {
       Rule rule = sentence.program.progression.rules
-          .firstWhere((rule) => rule.exerciseName.value == scheme.name.value);
+          .firstWhere((rule) => rule.exerciseName == scheme.name);
 
       return Load(
           Amount(pastSession.exercises[0].workload.load.amount.value +
