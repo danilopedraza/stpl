@@ -36,7 +36,18 @@ class Evaluator {
   }
 
   Session nextSessionScheme(Name name) {
-    return sentence.program.sessions.firstWhere((session) => session.name.value == name.value);
+    return sentence.program.sessions
+        .firstWhere((session) => session.name.value == name.value);
+  }
+
+  Load prescribeLoad(Exercise scheme, TrainingSession pastSession) {
+    if (pastSession.exercises[0].name.value == scheme.name.value) {
+      return Load(
+          Amount(pastSession.exercises[0].workload.load.amount.value + 1),
+          scheme.workload.load.unit);
+    } else {
+      return UnknownLoad();
+    }
   }
 
   Workload prescribeWorkload(Exercise scheme) {
@@ -45,25 +56,21 @@ class Evaluator {
     final TrainingSession pastSession = sessionOfTypeExists(newType)
         ? lastSessionOfType(newType)
         : lastSession();
-    
+
     return Workload(
-          scheme.workload.sets,
-          scheme.workload.reps,
-          Load(Amount(pastSession.exercises[0].workload.load.amount.value + 1),
-              scheme.workload.load.unit),
-        );
+      scheme.workload.sets,
+      scheme.workload.reps,
+      prescribeLoad(scheme, pastSession),
+    );
   }
 
   Exercise prescribe(Exercise scheme) {
-    return Exercise(
-      scheme.name,
-      prescribeWorkload(scheme));
+    return Exercise(scheme.name, prescribeWorkload(scheme));
   }
 
   TrainingSession nextSession() {
     final Name newType = nextSessionType();
     final Session newSessionScheme = nextSessionScheme(newType);
-    
 
     final List<Exercise> newExercises = [
       prescribe(newSessionScheme.exercises[0]),
