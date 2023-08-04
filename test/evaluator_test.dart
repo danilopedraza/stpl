@@ -131,4 +131,24 @@ void main() {
     expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
         equals(41));
   });
+
+  test('nextSession() should change the load depending on the rules', () {
+    const String input = '''Session A:
+                              Press 3x5
+                            Session B:
+                              Bench 3x5
+                            Progression:
+                              Press goes up 1kg every 2 times
+                              Bench goes up 2.5kg every time
+                            Training session 1 (A):
+                              Press 3x5x20kg
+                            Training session 2 (B):
+                              Bench 3x5x40kg
+                            Training session 3 (A):
+                              Press 3x5x20kg
+''';
+    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
+        equals(42.5));
+  });
 }

@@ -40,10 +40,20 @@ class Evaluator {
         .firstWhere((session) => session.name.value == name.value);
   }
 
+  bool ruleAvailable(Exercise scheme) {
+    return sentence.program.progression.rules
+        .any((rule) => rule.exerciseName.value == scheme.name.value);
+  }
+
   Load prescribeLoad(Exercise scheme, TrainingSession pastSession) {
-    if (pastSession.exercises[0].name.value == scheme.name.value) {
+    if (pastSession.exercises[0].name.value == scheme.name.value &&
+        ruleAvailable(scheme)) {
+      Rule rule = sentence.program.progression.rules
+          .firstWhere((rule) => rule.exerciseName.value == scheme.name.value);
+
       return Load(
-          Amount(pastSession.exercises[0].workload.load.amount.value + 1),
+          Amount(pastSession.exercises[0].workload.load.amount.value +
+              rule.load.amount.value),
           scheme.workload.load.unit);
     } else {
       return UnknownLoad();
