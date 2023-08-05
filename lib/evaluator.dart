@@ -69,9 +69,8 @@ class Evaluator {
     final Name newType = nextSessionType();
     final Session newSessionScheme = nextSessionScheme(newType);
 
-    final List<Exercise> newExercises = [
-      prescribe(newSessionScheme.exercises[0]),
-    ];
+    final List<Exercise> newExercises =
+        newSessionScheme.exercises.map(prescribe).toList();
 
     return TrainingSession(newType, newExercises);
   }
