@@ -23,17 +23,6 @@ class Evaluator {
         .lastWhere((session) => session.type == type);
   }
 
-  Exercise updateExercise(Exercise exercise) {
-    return Exercise(
-        exercise.name,
-        Workload(
-          exercise.workload.sets,
-          exercise.workload.reps,
-          Load(Amount(exercise.workload.load.amount.value + 1),
-              exercise.workload.load.unit),
-        ));
-  }
-
   Session nextSessionScheme(Name name) {
     return sentence.program.sessions
         .firstWhere((session) => session.name == name);
