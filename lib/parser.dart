@@ -128,7 +128,6 @@ class Parser {
   Name name() => Name(consume(TokenType.name));
 
   Amount amount() => Amount(double.parse(consume(TokenType.number).value));
-  // double.parse(numberToken.value)
 
   Unit unit() {
     consume(TokenType.kg);
