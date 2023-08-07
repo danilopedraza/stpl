@@ -34,17 +34,18 @@ class Evaluator {
   }
 
   Load prescribeLoad(Exercise scheme, TrainingSession pastSession) {
-    final bool exerciseInSession = pastSession.exercises.any((exercise) => exercise.name == scheme.name);
+    final bool exerciseInSession =
+        pastSession.exercises.any((exercise) => exercise.name == scheme.name);
 
     if (exerciseInSession && ruleAvailable(scheme)) {
-      final Exercise pastWork = pastSession.exercises.firstWhere((exercise) => exercise.name == scheme.name);
+      final Exercise pastWork = pastSession.exercises
+          .firstWhere((exercise) => exercise.name == scheme.name);
 
       Rule rule = sentence.program.progression.rules
           .firstWhere((rule) => rule.exerciseName == scheme.name);
 
       return Load(
-          Amount(pastWork.workload.load.amount.value +
-              rule.load.amount.value),
+          Amount(pastWork.workload.load.amount.value + rule.load.amount.value),
           pastWork.workload.load.unit);
     } else {
       return UnknownLoad();

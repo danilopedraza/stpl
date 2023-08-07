@@ -178,7 +178,9 @@ void main() {
     expect(evaluator.nextSession().exercises[1].name.value, equals('Deadlift'));
   });
 
-  test('nextSession() should prescribe all the exercises needed with the past session unit', () {
+  test(
+      'nextSession() should prescribe all the exercises needed with the past session unit',
+      () {
     const String input = '''Session A:
                               Press 3x5
                               Row 3x5
@@ -201,10 +203,13 @@ void main() {
                               Row 3x5x30kg
 ''';
     Evaluator evaluator = Evaluator(Parser(Lexer(input)));
-    expect(evaluator.nextSession().exercises[1].workload.load.unit, equals(Unit.kg));
+    expect(evaluator.nextSession().exercises[1].workload.load.unit,
+        equals(Unit.kg));
   });
 
-  test('nextSession() should prescribe all the exercises needed with the correct load', () {
+  test(
+      'nextSession() should prescribe all the exercises needed with the correct load',
+      () {
     const String input = '''Session A:
                               Press 3x5
                               Row 3x5
@@ -227,6 +232,7 @@ void main() {
                               Row 3x5x30kg
 ''';
     Evaluator evaluator = Evaluator(Parser(Lexer(input)));
-    expect(evaluator.nextSession().exercises[1].workload.load.amount.value, equals(65));
+    expect(evaluator.nextSession().exercises[1].workload.load.amount.value,
+        equals(65));
   });
 }

@@ -16,11 +16,20 @@ class Amount {
   final num value;
 
   Amount(this.value);
+
+  @override
+  String toString() => value.toInt().toString();
 }
 
 enum Unit {
-  kg,
-  none,
+  kg('kg'),
+  none('');
+
+  final String str;
+  const Unit(this.str);
+
+  @override
+  String toString() => str;
 }
 
 class Load {
@@ -28,6 +37,9 @@ class Load {
   final Unit unit;
 
   Load(this.amount, this.unit);
+
+  @override
+  String toString() => amount.toString() + unit.toString();
 }
 
 class UnknownLoad extends Load {
@@ -40,6 +52,8 @@ class Workload {
   final Load load;
 
   Workload(this.sets, this.reps, this.load);
+
+  List<String> toRow() => [sets.toString(), reps.toString(), load.toString()];
 }
 
 class Exercise {
@@ -47,6 +61,8 @@ class Exercise {
   final Workload workload;
 
   Exercise(this.name, this.workload);
+
+  List<String> toRow() => [name.value] + workload.toRow();
 }
 
 class Session {
