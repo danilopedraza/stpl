@@ -5,7 +5,7 @@ import 'package:stpl/parser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('the formatter should take transform a prescription into a row', () {
+  test('the formatter should transform a prescription into a row', () {
     const String input = '''session a:
                             squat 3x5
                             progression:
@@ -21,7 +21,7 @@ void main() {
         ]));
   });
 
-  test('the formatter should transform several prescription into several rows',
+  test('the formatter should transform several prescriptions into several rows',
       () {
     const String input = '''SESSION a:
                             squat 3x5
