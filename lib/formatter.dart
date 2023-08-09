@@ -11,9 +11,6 @@ class Formatter {
 
   List<String> get rowLabels => ['Exercise', 'sets', 'reps', 'load'];
 
-  String get csv {
-    String commaSeparated(List<String> row) => row.join(",");
-
-    return [rowLabels, ...table].map(commaSeparated).join("\n");
-  }
+  String get csv =>
+      [rowLabels, ...table].map((row) => row.join(",")).join("\n");
 }
