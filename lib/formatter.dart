@@ -17,6 +17,6 @@ class Formatter {
     String linebreakSeparated(Iterable<String> lines) =>
         lines.reduce((value, element) => '$value\n$element');
 
-    return linebreakSeparated(([rowLabels] + table).map(commaSeparated));
+    return linebreakSeparated([rowLabels, ...table].map(commaSeparated));
   }
 }
