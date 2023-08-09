@@ -13,8 +13,7 @@ class Formatter {
 
   String get csv {
     String commaSeparated(List<String> row) => row.join(",");
-    String linebreakSeparated(Iterable<String> lines) => lines.join("\n");
 
-    return linebreakSeparated([rowLabels, ...table].map(commaSeparated));
+    return [rowLabels, ...table].map(commaSeparated).join("\n");
   }
 }
