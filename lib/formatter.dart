@@ -30,7 +30,7 @@ class Formatter {
   String get markdown {
     List<String> rows = [
       markdownRow(rowLabels),
-      '| -------- | ---- | ---- | ---- |',
+      markdownRow([for (final length in columnLengths) '-' * length]),
     ];
 
     return rows.followedBy(table.map(markdownRow)).join('\n');
