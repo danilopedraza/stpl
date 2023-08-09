@@ -15,7 +15,7 @@ void main() {
 ''';
     Evaluator evaluator = Evaluator(Parser(Lexer(input)));
     expect(
-        Formatter(evaluator.nextSession()).table,
+        Formatter(evaluator.nextSession()).table.toList(),
         equals([
           ['squat', '3', '5', '60kg']
         ]));
@@ -37,7 +37,7 @@ void main() {
 ''';
     Evaluator evaluator = Evaluator(Parser(Lexer(input)));
     expect(
-        Formatter(evaluator.nextSession()).table,
+        Formatter(evaluator.nextSession()).table.toList(),
         equals([
           ['squat', '3', '5', '60kg'],
           ['press', '3', '10', '21kg']
