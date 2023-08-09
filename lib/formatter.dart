@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:stpl/parser.dart';
 
 class Formatter {
@@ -11,12 +9,14 @@ class Formatter {
 
   Formatter(this.session);
 
+  List<String> get rowLabels => ['Exercise', 'sets', 'reps', 'load'];
+
   String get csv {
-    String commaSeparated(List<String> row) => row.reduce((value, element) => '$value,$element');
+    String commaSeparated(List<String> row) =>
+        row.reduce((value, element) => '$value,$element');
+    String linebreakSeparated(Iterable<String> lines) =>
+        lines.reduce((value, element) => '$value\n$element');
 
-    String res = 'Exercise,sets,reps,load\n';
-    // table.forEach((row) => res += '${commaSeparated(row)}\n');
-
-    return res + table.map(commaSeparated).reduce((value, element) => value + '\n' + element);
+    return linebreakSeparated(([rowLabels] + table).map(commaSeparated));
   }
 }
