@@ -29,7 +29,7 @@ class Formatter {
 
   String get markdown {
     List<String> rows = [
-      '| Exercise | sets | reps | load |',
+      markdownRow(rowLabels),
       '| -------- | ---- | ---- | ---- |',
     ];
 
