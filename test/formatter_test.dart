@@ -128,4 +128,26 @@ void main() {
           '| press    | 3    | 10   | 21kg |',
         ].join('\n')));
   });
+
+  test(
+      'the formatter should create the Markdown table correctly even with large names',
+      () {
+    const String input = '''SESSION a:
+                            Frontinflons 10x10
+
+                            PROGRESSION:
+                            Frontinflons goes up 10kg EVERY TIME
+
+                            TRAINING SESSION 1 (a):
+                            Frontinflons 10x10x95kg
+''';
+    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    expect(
+        Formatter(evaluator.nextSession()).markdown,
+        equals([
+          '| Exercise     | sets | reps | load  |',
+          '| ------------ | ---- | ---- | ----- |',
+          '| Frontinflons | 10   | 10   | 105kg |',
+        ].join('\n')));
+  });
 }

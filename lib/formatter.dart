@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:stpl/parser.dart';
 
 class Formatter {
@@ -13,7 +15,10 @@ class Formatter {
   String get csv =>
       [rowLabels, ...table].map((row) => row.join(",")).join("\n");
 
-  List<int> get columnLengths => [8, 4, 4, 4];
+  List<int> get columnLengths => [
+        for (int i = 0; i < rowLabels.length; i++)
+          [rowLabels, ...table].map((e) => e[i].length).reduce(max)
+      ];
 
   String markdownRow(List<String> row) {
     String res = '|';
