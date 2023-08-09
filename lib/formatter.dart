@@ -3,9 +3,8 @@ import 'package:stpl/parser.dart';
 class Formatter {
   final TrainingSession session;
 
-  Iterable<List<String>> get table {
-    return session.exercises.map((exercise) => exercise.toRow());
-  }
+  Iterable<List<String>> get table =>
+      session.exercises.map((exercise) => exercise.toRow());
 
   Formatter(this.session);
 
