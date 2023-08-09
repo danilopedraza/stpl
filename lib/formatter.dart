@@ -12,8 +12,7 @@ class Formatter {
   List<String> get rowLabels => ['Exercise', 'sets', 'reps', 'load'];
 
   String get csv {
-    String commaSeparated(List<String> row) =>
-        row.reduce((value, element) => '$value,$element');
+    String commaSeparated(List<String> row) => row.join(",");
     String linebreakSeparated(Iterable<String> lines) =>
         lines.reduce((value, element) => '$value\n$element');
 
