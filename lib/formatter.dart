@@ -23,7 +23,7 @@ class Formatter {
   String markdownRow(List<String> row) {
     String res = '|';
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < rowLabels.length; i++) {
       var filler = columnLengths[i] - row[i].length;
 
       res += ' ${row[i]}${' ' * filler} |';
