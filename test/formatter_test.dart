@@ -44,7 +44,9 @@ void main() {
         ]));
   });
 
-  test('the formatter should transform a prescription into a CSV-style row with correct column names', () {
+  test(
+      'the formatter should transform a prescription into a CSV-style row with correct column names',
+      () {
     const String input = '''SESSION a:
                             squat 3x5
 
@@ -55,12 +57,13 @@ void main() {
                             squat 3x5x55kg
 ''';
     Evaluator evaluator = Evaluator(Parser(Lexer(input)));
-    expect(
-          Formatter(evaluator.nextSession()).csv,
-          equals('Exercise,sets,reps,load\nsquat,3,5,60kg'));
+    expect(Formatter(evaluator.nextSession()).csv,
+        equals('Exercise,sets,reps,load\nsquat,3,5,60kg'));
   });
 
-  test('the formatter should transform several prescriptions into a CSV-style row with correct column names', () {
+  test(
+      'the formatter should transform several prescriptions into a CSV-style row with correct column names',
+      () {
     const String input = '''SESSION a:
                             squat 3x5
                             press 3x10
@@ -74,8 +77,7 @@ void main() {
                             press 3x10x20kg
 ''';
     Evaluator evaluator = Evaluator(Parser(Lexer(input)));
-    expect(
-          Formatter(evaluator.nextSession()).csv,
-          equals('Exercise,sets,reps,load\nsquat,3,5,60kg\npress,3,10,21kg'));
+    expect(Formatter(evaluator.nextSession()).csv,
+        equals('Exercise,sets,reps,load\nsquat,3,5,60kg\npress,3,10,21kg'));
   });
 }
