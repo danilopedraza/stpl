@@ -1,9 +1,7 @@
-import 'package:stpl/lexer.dart';
-
 class Name {
   final String value;
 
-  Name(Token nameToken) : value = nameToken.value;
+  Name(this.value);
 
   @override
   bool operator ==(Object other) => other is Name && value == other.value;

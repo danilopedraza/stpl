@@ -25,7 +25,7 @@ class Parser {
     return oldLookahead;
   }
 
-  Name name() => Name(consume(TokenType.name));
+  Name name() => Name(consume(TokenType.name).value);
 
   Amount amount() => Amount(double.parse(consume(TokenType.number).value));
 
