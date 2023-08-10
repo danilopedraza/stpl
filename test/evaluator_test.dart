@@ -1,6 +1,5 @@
+import 'package:stpl/ast.dart';
 import 'package:stpl/evaluator.dart';
-import 'package:stpl/lexer.dart';
-import 'package:stpl/parser.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -13,7 +12,7 @@ void main() {
                             Training session 1 (A):
                               Squat 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].name.value, 'Squat');
   });
 
@@ -27,7 +26,7 @@ void main() {
                             Training session 1 (A):
                               Squat 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().type.value, 'B');
   });
 
@@ -41,7 +40,7 @@ void main() {
                             Training session 1 (A):
                               Squat 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
         equals(21));
   });
@@ -57,7 +56,7 @@ void main() {
                             Training session 1 (A):
                               Squat 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].name.value, equals('Press'));
   });
 
@@ -74,7 +73,7 @@ void main() {
                             Training session 1 (A):
                               Squat 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(
         evaluator.nextSession().exercises[0].workload.load, isA<UnknownLoad>());
   });
@@ -87,7 +86,7 @@ void main() {
                             Training session 1 (A):
                               Squat 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
         equals(21));
   });
@@ -107,7 +106,7 @@ void main() {
                             Training session 3 (A):
                               Press 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].name.value, equals('Bench'));
   });
 
@@ -127,7 +126,7 @@ void main() {
                             Training session 3 (A):
                               Press 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
         equals(41));
   });
@@ -147,7 +146,7 @@ void main() {
                             Training session 3 (A):
                               Press 3x5x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[0].workload.load.amount.value,
         equals(42.5));
   });
@@ -174,7 +173,7 @@ void main() {
                               Press 3x5x20kg
                               Row 3x5x30kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[1].name.value, equals('Deadlift'));
   });
 
@@ -202,7 +201,7 @@ void main() {
                               Press 3x5x20kg
                               Row 3x5x30kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[1].workload.load.unit,
         equals(Unit.kg));
   });
@@ -231,7 +230,7 @@ void main() {
                               Press 3x5x20kg
                               Row 3x5x30kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(evaluator.nextSession().exercises[1].workload.load.amount.value,
         equals(65));
   });

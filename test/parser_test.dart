@@ -1,3 +1,4 @@
+import 'package:stpl/ast.dart';
 import 'package:stpl/parser.dart';
 import 'package:test/test.dart';
 

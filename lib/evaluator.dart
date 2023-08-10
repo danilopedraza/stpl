@@ -1,3 +1,4 @@
+import 'package:stpl/ast.dart';
 import 'package:stpl/parser.dart';
 
 class Evaluator {
@@ -5,6 +6,7 @@ class Evaluator {
   final Sentence sentence;
 
   Evaluator(this.parser) : sentence = parser.sentence();
+  Evaluator.from(String str) : this(Parser.from(str));
 
   Name nextSessionType() {
     final int index =

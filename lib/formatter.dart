@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:stpl/parser.dart';
+import 'package:stpl/ast.dart';
 
 class Formatter {
   final TrainingSession session;
