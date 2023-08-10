@@ -123,6 +123,7 @@ class Parser {
   Token lookahead;
 
   Parser(this.lexer) : lookahead = lexer.nextToken();
+  Parser.from(String str) : this(Lexer(str));
 
   bool lookaheadIs(TokenType type) => lookahead.type == type;
 
