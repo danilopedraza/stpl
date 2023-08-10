@@ -175,11 +175,7 @@ class Parser {
     return res;
   }
 
-  program() {
-    return Program(sessions(), progression());
-  }
+  program() => Program(sessions(), progression());
 
-  sentence() {
-    return Sentence(program(), trainingSessions());
-  }
+  sentence() => Sentence(program(), trainingSessions());
 }
