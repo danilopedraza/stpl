@@ -25,16 +25,16 @@ class Parser {
     return oldLookahead;
   }
 
-  Name name() => Name(consume(TokenType.name).value);
+  name() => Name(consume(TokenType.name).value);
 
-  Amount amount() => Amount(double.parse(consume(TokenType.number).value));
+  amount() => Amount(double.parse(consume(TokenType.number).value));
 
-  Unit unit() {
+  unit() {
     consume(TokenType.kg);
     return Unit.kg;
   }
 
-  Load load() => Load(amount(), unit());
+  load() => Load(amount(), unit());
 
   void separator() {
     consume(TokenType.separator);
@@ -54,7 +54,7 @@ class Parser {
     } while (lookaheadIs(TokenType.lineBreak));
   }
 
-  Workload workload() {
+  workload() {
     final Amount sets = amount();
     separator();
     final Amount reps = amount();
@@ -67,9 +67,9 @@ class Parser {
     return Workload(sets, reps, UnknownLoad());
   }
 
-  Exercise exercise() => Exercise(name(), workload());
+  exercise() => Exercise(name(), workload());
 
-  List<Exercise> exercises() {
+  exercises() {
     List<Exercise> res = [];
 
     do {
@@ -85,7 +85,7 @@ class Parser {
     return res;
   }
 
-  Session session() {
+  session() {
     consume(TokenType.session);
     Name sessionName = name();
     colon();
@@ -94,7 +94,7 @@ class Parser {
     return Session(sessionName, exercises());
   }
 
-  Period period() {
+  period() {
     consume(TokenType.every);
 
     if (lookaheadIs(TokenType.time)) {
@@ -107,19 +107,19 @@ class Parser {
     }
   }
 
-  RuleType ruleType() {
+  ruleType() {
     consume(TokenType.up);
     return RuleType.up;
   }
 
-  Rule rule() {
+  rule() {
     final exerciseName = name();
     consume(TokenType.goes);
 
     return Rule(exerciseName, ruleType(), load(), period());
   }
 
-  TrainingSession trainingSession() {
+  trainingSession() {
     consume(TokenType.training);
     consume(TokenType.session);
     amount();
@@ -132,7 +132,7 @@ class Parser {
     return TrainingSession(type, exercises());
   }
 
-  List<TrainingSession> trainingSessions() {
+  trainingSessions() {
     List<TrainingSession> res = [];
 
     do {
@@ -142,7 +142,7 @@ class Parser {
     return res;
   }
 
-  List<Rule> rules() {
+  rules() {
     List<Rule> res = [];
 
     do {
@@ -158,14 +158,14 @@ class Parser {
     return res;
   }
 
-  Progression progression() {
+  progression() {
     consume(TokenType.progression);
     consume(TokenType.colon);
     lineBreaks();
     return Progression(rules());
   }
 
-  List<Session> sessions() {
+  sessions() {
     List<Session> res = [];
 
     do {
@@ -175,11 +175,11 @@ class Parser {
     return res;
   }
 
-  Program program() {
+  program() {
     return Program(sessions(), progression());
   }
 
-  Sentence sentence() {
+  sentence() {
     return Sentence(program(), trainingSessions());
   }
 }
