@@ -1,3 +1,5 @@
+import 'package:stpl/cli.dart';
+
 void main(List<String> arguments) {
-  print('Hello world!');
+  print(Controller(arguments).response);
 }
