@@ -17,7 +17,7 @@ class Formatter {
 
   List<int> get columnLengths => [
         for (int i = 0; i < rowLabels.length; i++)
-          [rowLabels, ...table].map((e) => e[i].length).reduce(max)
+          [rowLabels].followedBy(table).map((e) => e[i].length).reduce(max)
       ];
 
   String markdownRow(List<String> row) {
