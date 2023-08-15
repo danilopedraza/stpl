@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:stpl/cli.dart';
 import 'package:test/test.dart';
 
@@ -15,7 +16,7 @@ void main() {
       () {
     final String command = 'foo';
     final String expected = 'Could not find a command named "$command"';
-    expect(CLIManager.fromArgs(['program.stpl', command]).response,
+    expect(CLIManager(['program.stpl', command], File('program.stpl')).response,
         equals(expected));
   });
 
