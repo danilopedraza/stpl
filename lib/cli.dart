@@ -1,6 +1,11 @@
+import 'dart:io';
+
 class CLIManager {
   final List<String> arguments;
-  CLIManager(this.arguments);
+  final File file;
+  CLIManager(this.arguments, this.file);
+  CLIManager.fromArgs(List<String> arguments)
+      : this(arguments, File(arguments.isEmpty ? '' : arguments.first));
 
   String get response {
     if (arguments.length < 2) {

@@ -7,7 +7,7 @@ void main() {
       () {
     final String expected =
         'A command-line utility for STPL.\nUsage: stpl <file> <command>';
-    expect(CLIManager([]).response, equals(expected));
+    expect(CLIManager.fromArgs([]).response, equals(expected));
   });
 
   test(
@@ -15,7 +15,8 @@ void main() {
       () {
     final String command = 'foo';
     final String expected = 'Could not find a command named "$command"';
-    expect(CLIManager(['program.stpl', command]).response, equals(expected));
+    expect(CLIManager.fromArgs(['program.stpl', command]).response,
+        equals(expected));
   });
 
   test(
@@ -23,6 +24,6 @@ void main() {
       () {
     final String expected =
         'A command-line utility for STPL.\nUsage: stpl <file> <command>';
-    expect(CLIManager(['program.stpl']).response, equals(expected));
+    expect(CLIManager.fromArgs(['program.stpl']).response, equals(expected));
   });
 }
