@@ -33,11 +33,11 @@ class Formatter {
   }
 
   String get markdown {
-    List<String> rows = [
-      markdownRow(rowLabels),
-      markdownRow([for (final length in columnLengths) '-' * length]),
+    List<List<String>> rows = [
+      rowLabels,
+      [for (final length in columnLengths) '-' * length],
     ];
 
-    return rows.followedBy(table.map(markdownRow)).join('\n');
+    return rows.followedBy(table).map(markdownRow).join('\n');
   }
 }
