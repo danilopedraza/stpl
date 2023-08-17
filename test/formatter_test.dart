@@ -1,7 +1,5 @@
 import 'package:stpl/evaluator.dart';
 import 'package:stpl/formatter.dart';
-import 'package:stpl/lexer.dart';
-import 'package:stpl/parser.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -13,7 +11,7 @@ void main() {
                             training session 1 (a):
                             squat 3x5x55kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(
         Formatter(evaluator.nextSession()).table.toList(),
         equals([
@@ -35,7 +33,7 @@ void main() {
                             squat 3x5x55kg
                             press 3x10x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(
         Formatter(evaluator.nextSession()).table.toList(),
         equals([
@@ -56,7 +54,7 @@ void main() {
                             TRAINING SESSION 1 (a):
                             squat 3x5x55kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(Formatter(evaluator.nextSession()).csv,
         equals('Exercise,sets,reps,load\nsquat,3,5,60kg'));
   });
@@ -76,7 +74,7 @@ void main() {
                             squat 3x5x55kg
                             press 3x10x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(Formatter(evaluator.nextSession()).csv,
         equals('Exercise,sets,reps,load\nsquat,3,5,60kg\npress,3,10,21kg'));
   });
@@ -93,7 +91,7 @@ void main() {
                             TRAINING SESSION 1 (a):
                             squat 3x5x55kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(
         Formatter(evaluator.nextSession()).markdown,
         equals([
@@ -118,7 +116,7 @@ void main() {
                             squat 3x5x55kg
                             press 3x10x20kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(
         Formatter(evaluator.nextSession()).markdown,
         equals([
@@ -141,7 +139,7 @@ void main() {
                             TRAINING SESSION 1 (a):
                             Frontinflons 10x10x95kg
 ''';
-    Evaluator evaluator = Evaluator(Parser(Lexer(input)));
+    Evaluator evaluator = Evaluator.from(input);
     expect(
         Formatter(evaluator.nextSession()).markdown,
         equals([
