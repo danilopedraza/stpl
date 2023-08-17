@@ -13,7 +13,7 @@ class Formatter {
   List<String> get rowLabels => ['Exercise', 'sets', 'reps', 'load'];
 
   String get csv =>
-      [rowLabels, ...table].map((row) => row.join(",")).join("\n");
+      [rowLabels].followedBy(table).map((row) => row.join(",")).join("\n");
 
   List<int> get columnLengths => [
         for (int i = 0; i < rowLabels.length; i++)
