@@ -17,17 +17,27 @@ class Formatter {
   String get csv =>
       [rowLabels].followedBy(table).map((row) => row.join(",")).join("\n");
 
-  List<int> get columnLengths => IterableZip([rowLabels].followedBy(table))
-      .map((column) => column.map((cell) => cell.length).reduce(max))
-      .toList();
+  List<int> get columnLengths {
+    int maxColLength(List<String> column) =>
+        column.map((cell) => cell.length).reduce(max);
+
+    return IterableZip([rowLabels].followedBy(table))
+        .map(maxColLength)
+        .toList();
+  }
 
   String markdownRow(List<String> row) {
+    String padRight(str, maxLength) {
+      final int padding = maxLength - str.length;
+
+      return '$str${' ' * padding}';
+    }
+
     final Iterable<String> columns =
         IterableZip([columnLengths, row]).map((List<dynamic> pair) {
-      final [maxLength, column] = pair;
-      final int padding = maxLength - column.length;
+      final [maxLength, cell] = pair;
 
-      return '$column${' ' * padding}';
+      return padRight(cell, maxLength);
     });
 
     return '| ${columns.join(' | ')} |';
