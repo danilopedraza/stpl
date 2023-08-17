@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:stpl/ast.dart';
 
+import 'package:collection/collection.dart';
+
 class Formatter {
   final TrainingSession session;
 
@@ -21,15 +23,15 @@ class Formatter {
       ];
 
   String markdownRow(List<String> row) {
-    String res = '|';
+    final Iterable<String> columns =
+        IterableZip([columnLengths, row]).map((List<dynamic> pair) {
+      final [maxLength, column] = pair;
+      final int padding = maxLength - column.length;
+      
+      return '$column${' ' * padding}';
+    });
 
-    for (int i = 0; i < rowLabels.length; i++) {
-      var filler = columnLengths[i] - row[i].length;
-
-      res += ' ${row[i]}${' ' * filler} |';
-    }
-
-    return res;
+    return '| ${columns.join(' | ')} |';
   }
 
   String get markdown {
