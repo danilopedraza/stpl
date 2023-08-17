@@ -7,8 +7,12 @@ import 'package:test/test.dart';
 class MockFile extends Mock implements File {
   @override
   final String path;
+  final bool shouldExist;
 
-  MockFile(this.path);
+  MockFile(this.path, {this.shouldExist = true});
+
+  @override
+  bool existsSync() => shouldExist;
 }
 
 @GenerateMocks([File])
@@ -36,6 +40,17 @@ void main() {
     final String command = 'foo';
     final file = MockFile(filename);
     final String expected = 'Could not find a command named "$command"';
+    expect(CLIManager([filename, command], file).response, equals(expected));
+  });
+
+  test(
+      'The CLI manager should give a specific help message when the file passed does not exist',
+      () {
+    final String filename = 'program.stpl';
+    final String command = 'next-session';
+    final file = MockFile(filename, shouldExist: false);
+    final String expected =
+        'Error when reading "$filename": no such file or directory.';
     expect(CLIManager([filename, command], file).response, equals(expected));
   });
 }

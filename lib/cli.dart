@@ -12,6 +12,10 @@ class CLIManager {
       return 'A command-line utility for STPL.\nUsage: stpl <file> <command>';
     }
 
+    if (!file.existsSync()) {
+      return 'Error when reading "${arguments[0]}": no such file or directory.';
+    }
+
     return 'Could not find a command named "${arguments[1]}"';
   }
 }
