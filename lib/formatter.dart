@@ -35,7 +35,7 @@ class Formatter {
   String get markdown {
     List<List<String>> rows = [
       rowLabels,
-      [for (final length in columnLengths) '-' * length],
+      columnLengths.map((len) => '-' * len).toList(),
     ];
 
     return rows.followedBy(table).map(markdownRow).join('\n');
