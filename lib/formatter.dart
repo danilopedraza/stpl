@@ -17,17 +17,16 @@ class Formatter {
   String get csv =>
       [rowLabels].followedBy(table).map((row) => row.join(",")).join("\n");
 
-  List<int> get columnLengths => [
-        for (int i = 0; i < rowLabels.length; i++)
-          [rowLabels].followedBy(table).map((e) => e[i].length).reduce(max)
-      ];
+  List<int> get columnLengths => IterableZip([rowLabels].followedBy(table))
+      .map((column) => column.map((cell) => cell.length).reduce(max))
+      .toList();
 
   String markdownRow(List<String> row) {
     final Iterable<String> columns =
         IterableZip([columnLengths, row]).map((List<dynamic> pair) {
       final [maxLength, column] = pair;
       final int padding = maxLength - column.length;
-      
+
       return '$column${' ' * padding}';
     });
 
