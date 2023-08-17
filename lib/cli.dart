@@ -16,6 +16,6 @@ class CLIManager {
       return 'Error when reading "${arguments[0]}": no such file or directory.';
     }
 
-    return 'Could not find a command named "${arguments[1]}"';
+    return 'Could not find a command named "${arguments[1]}".';
   }
 }

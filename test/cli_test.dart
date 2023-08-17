@@ -39,7 +39,7 @@ void main() {
     final String filename = 'program.stpl';
     final String command = 'foo';
     final file = MockFile(filename);
-    final String expected = 'Could not find a command named "$command"';
+    final String expected = 'Could not find a command named "$command".';
     expect(CLIManager([filename, command], file).response, equals(expected));
   });
 
