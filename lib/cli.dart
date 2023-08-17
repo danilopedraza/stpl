@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:stpl/parser.dart';
+import 'package:stpl/evaluator.dart';
+import 'package:stpl/formatter.dart';
 
 class CLIManager {
   final List<String> arguments;
@@ -16,6 +19,13 @@ class CLIManager {
       return 'Error when reading "${arguments[0]}": no such file or directory.';
     }
 
-    return 'Could not find a command named "${arguments[1]}".';
+    return switch (arguments[1]) {
+      'next-session' => nextSession,
+      _ => 'Could not find a command named "${arguments[1]}".',
+    };
   }
+
+  String get nextSession =>
+      Formatter(Evaluator(Parser.from(file.readAsStringSync())).nextSession())
+          .markdown;
 }
