@@ -3,7 +3,7 @@
 - [x] Describe "static" programs (linear progression, just a repeated microcycle)
 - [x] Export them to CSV
 - [x] Export them to plaintext
-- [ ] Interact with the system in a CLI
+- [x] Interact with the system in a CLI
 
 ## 0.2.0
 
