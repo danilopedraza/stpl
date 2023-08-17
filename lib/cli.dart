@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:stpl/parser.dart';
 import 'package:stpl/evaluator.dart';
 import 'package:stpl/formatter.dart';
 
@@ -26,6 +25,5 @@ class CLIManager {
   }
 
   String get nextSession =>
-      Formatter(Evaluator(Parser.from(file.readAsStringSync())).nextSession())
-          .markdown;
+      Formatter(Evaluator.from(file.readAsStringSync()).nextSession()).markdown;
 }
