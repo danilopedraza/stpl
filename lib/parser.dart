@@ -27,7 +27,12 @@ class Parser {
 
   name() => Name(consume(TokenType.name).value);
 
-  amount() => Amount(double.parse(consume(TokenType.number).value));
+  amount() {
+    final String str = consume(TokenType.number).value;
+    final num value = int.tryParse(str) ?? double.parse(str);
+
+    return Amount(value);
+  }
 
   unit() {
     consume(TokenType.kg);
