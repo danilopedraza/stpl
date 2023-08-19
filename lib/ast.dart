@@ -16,7 +16,8 @@ class Amount {
   Amount(this.value);
 
   @override
-  String toString() => value.toInt().toString();
+  String toString() =>
+      value % 1 == 0 ? value.toInt().toString() : value.toDouble().toString();
 }
 
 enum Unit {
