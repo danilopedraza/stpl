@@ -28,6 +28,20 @@ void main() {
     expect(parser.load().unit, Unit.kg);
   });
 
+  test('load() should transform \'80%\' in a load in percentage', () {
+    Parser parser = Parser.from('80%');
+    expect(parser.load().unit, Unit.percentage);
+  });
+
+  test('load() should throw a custom FormatException when \'80p\' is passed',
+      () {
+    Parser parser = Parser.from('80p');
+    expect(
+        () => parser.load(),
+        throwsA(predicate((FormatException e) =>
+            e.message == 'expected \'kg\' or \'percentage\', got \'name\'')));
+  });
+
   test('workload() should transform \'3x5\' in a workload of 3 sets', () {
     Parser parser = Parser.from('3x5');
     expect(parser.workload().sets.value, 3);

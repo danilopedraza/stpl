@@ -25,6 +25,14 @@ class Parser {
     return oldLookahead;
   }
 
+  Token consumeAny(List<TokenType> expectedTypes) {
+    if (expectedTypes.contains(lookahead.type)) {
+      return consume(lookahead.type);
+    }
+
+    throw FormatException('expected \'kg\' or \'percentage\', got \'name\'');
+  }
+
   name() => Name(consume(TokenType.name).value);
 
   amount() {
@@ -35,8 +43,13 @@ class Parser {
   }
 
   unit() {
-    consume(TokenType.kg);
-    return Unit.kg;
+    final TokenType type =
+        consumeAny([TokenType.kg, TokenType.percentage]).type;
+    if (type == TokenType.kg) {
+      return Unit.kg;
+    }
+
+    return Unit.percentage;
   }
 
   load() => Load(amount(), unit());

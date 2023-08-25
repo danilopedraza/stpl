@@ -151,6 +151,10 @@ void main() {
     expect(Lexer('1.').nextToken().value, '1.');
   });
 
+  test('\'%\' should result in a percentage token', () {
+    expect(Lexer('%').nextToken().type, TokenType.percentage);
+  });
+
   test('\'Session A:\\n\' should result in four specific tokens', () {
     expectTypes('Session A:\n', [
       TokenType.session,

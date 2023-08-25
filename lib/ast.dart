@@ -21,6 +21,7 @@ class Amount {
 
 enum Unit {
   kg('kg'),
+  percentage('%'),
   none('');
 
   final String str;
