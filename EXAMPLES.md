@@ -129,3 +129,12 @@ Week 4: Something like 1x5x40%, 1x5x50%, 1x5x60%
 Where AMAP is As Many As Possible. In addition to that, the last set of the first three sessions is also AMAP. Right now, I'm kinda surprised by the amount of details that I have to account for, and how to write them smoothly.
 
 Each stage of this program has four stages: Accumulation, intensification, realization and deload. In the first three the intensity goes up as the volume goes down, and the deload is that - a deload.
+
+I would like a session to be written like this:
+
+```
+Session 1, stage 1, intensification:
+Squat 3x10x67.5% of TM
+```
+
+Later I would like to generalize more to make the program description more succinct, but this does just fine.
