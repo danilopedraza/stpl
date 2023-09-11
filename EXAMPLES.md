@@ -115,13 +115,17 @@ Deadlift,1,5,75kg
 
 Right now, this is kinda done. There are a lot of cases that I did not implemented yet, but the *happy path* is just fine.
 
+## Periodized, percentage-based program
+
 Now let's try to represent programs that make some longer-term adjustments. My example to follow is The Juggernaut Method 2.0. This program is more complex. It lasts four months maximum, with four stages (very similar between them) of one month each. For each exercise trained (basic JM 2.0 prescribes Strict Press and the powerlifts) there is a session each week. It goes like this (for Strict Press only, the others are exactly the same):
 
 ```
 Week 1: 5x10x60% of TM (Training Max)
 Week 2: 3x10x67.5% of TM
 Week 3: 1xAMAPx75% of TM
-Week 4: Something like 3x5x40-60% of TM (it can be done as a pyramid)
+Week 4: Something like 1x5x40%, 1x5x50%, 1x5x60%
 ```
 
-Where AMAP is As Many As Possible. In addition to that, the last set of the first three sessions is also AMAP. Right now I'm kinda surprised by the amount of details that I have to account for, and how to write them smoothly.
+Where AMAP is As Many As Possible. In addition to that, the last set of the first three sessions is also AMAP. Right now, I'm kinda surprised by the amount of details that I have to account for, and how to write them smoothly.
+
+Each stage of this program has four stages: Accumulation, intensification, realization and deload. In the first three the intensity goes up as the volume goes down, and the deload is that - a deload.
