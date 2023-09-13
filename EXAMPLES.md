@@ -133,7 +133,7 @@ Each stage of this program has four stages: Accumulation, intensification, reali
 I would like a session to be written like this:
 
 ```
-Session 1, stage 1, intensification:
+Session 1, intensification, first stage:
 Squat 3x10x67.5% of TM
 ```
 
