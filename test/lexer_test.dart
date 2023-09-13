@@ -155,6 +155,18 @@ void main() {
     expect(Lexer('%').nextToken().type, TokenType.percentage);
   });
 
+  test('\',\' should result in a comma token', () {
+    expect(Lexer(',').nextToken().type, TokenType.comma);
+  });
+
+  test('\'of\' should result in an of token', () {
+    expect(Lexer('of').nextToken().type, TokenType.of);
+  });
+
+  test('\'AMAP\' should result in an amap token', () {
+    expect(Lexer('AMAP').nextToken().type, TokenType.amap);
+  });
+
   test('\'Session A:\\n\' should result in four specific tokens', () {
     expectTypes('Session A:\n', [
       TokenType.session,
