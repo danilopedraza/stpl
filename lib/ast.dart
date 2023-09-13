@@ -1,7 +1,9 @@
 class Name {
-  final String value;
+  final List<String> values;
 
-  Name(this.value);
+  Name(this.values);
+
+  String get value => values.join(' ');
 
   @override
   bool operator ==(Object other) => other is Name && value == other.value;

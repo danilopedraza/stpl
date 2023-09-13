@@ -33,7 +33,15 @@ class Parser {
     throw FormatException('expected \'kg\' or \'percentage\', got \'name\'');
   }
 
-  name() => Name(consume(TokenType.name).value);
+  name() {
+    List<String> names = [];
+
+    do {
+      names.add(consume(TokenType.name).value);
+    } while (lookaheadIs(TokenType.name));
+
+    return Name(names);
+  }
 
   amount() {
     final String str = consume(TokenType.number).value;

@@ -8,6 +8,11 @@ void main() {
     expect(parser.name().value, 'Squat');
   });
 
+  test('name() should parse composite names', () {
+    Parser parser = Parser.from('first stage');
+    expect(parser.name().value, 'first stage');
+  });
+
   test('amount() should transform \'5\' in a node with the amount 5', () {
     Parser parser = Parser.from('5');
     expect(parser.amount().value, 5.0);

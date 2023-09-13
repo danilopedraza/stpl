@@ -134,7 +134,7 @@ I would like a session to be written like this:
 
 ```
 Session 1, intensification, first stage:
-Squat 3x10x67.5% of TM
+Squat 3x10x67.5%
 ```
 
-Later I would like to generalize more to make the program description more succinct, but this does just fine.
+Note that here I'm just putting the percentage. Later I would like to generalize more to make the program description more succinct, but this does just fine.
