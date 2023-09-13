@@ -17,6 +17,8 @@ class Amount {
 
   @override
   String toString() => value.toString();
+
+  Amount operator +(Amount other) => Amount(value + other.value);
 }
 
 enum Unit {

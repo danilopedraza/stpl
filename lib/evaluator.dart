@@ -46,8 +46,7 @@ class Evaluator {
       Rule rule = sentence.program.progression.rules
           .firstWhere((rule) => rule.exerciseName == scheme.name);
 
-      return Load(
-          Amount(pastWork.workload.load.amount.value + rule.load.amount.value),
+      return Load(pastWork.workload.load.amount + rule.load.amount,
           pastWork.workload.load.unit);
     } else {
       return UnknownLoad();

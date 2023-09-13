@@ -7,4 +7,8 @@ void main() {
       () {
     expect(Amount(2.5).toString(), equals('2.5'));
   });
+
+  test('a sum of amounts should return the correct result', () {
+    expect((Amount(2.5) + Amount(2.5)).toString(), equals('5.0'));
+  });
 }
